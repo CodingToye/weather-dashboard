@@ -1,4 +1,4 @@
 # This pre-push file
 #!/bin/bash
 
-npm run test
+npm run test -- --watchAll=false
