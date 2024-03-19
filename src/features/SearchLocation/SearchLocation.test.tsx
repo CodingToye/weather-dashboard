@@ -8,7 +8,7 @@ describe('SearchLocation', () => {
     test('SearchLocation component renders', () => {
         render(<SearchLocation />);
 
-        const comp = screen.getByTestId('search-location-test4');
+        const comp = screen.getByTestId('search-location-test');
         expect(comp).toBeInTheDocument();
     });
 });
