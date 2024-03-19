@@ -21,8 +21,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "test:coverage": "react-scripts test --coverage",
-        "eject": "react-scripts eject",
-        "prepare": "husky"
+        "prepare": "husky install",
+        "lint": "eslint ."
     },
     "eslintConfig": {
         "extends": [
@@ -36,6 +36,19 @@
             "reportWebVitals.ts",
             "index.tsx"
         ]
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": [
+            "npm run lint",
+            "npm test",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "pre-push": "npm test -- --watchAll=false"
+        }
     },
     "browserslist": {
         "production": [
