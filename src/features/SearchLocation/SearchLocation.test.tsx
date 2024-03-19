@@ -6,7 +6,7 @@ describe('SearchLocation', () => {
         cleanup();
     });
     test('SearchLocation component renders', () => {
-        render(<SearchLocation />);
+        render(<SearchLocation location='New York' />);
 
         const comp = screen.getByTestId('search-location-test');
         expect(comp).toBeInTheDocument();
