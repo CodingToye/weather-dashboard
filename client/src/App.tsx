@@ -35,11 +35,44 @@ function App() {
         fetchWeather(city);
     };
 
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
     return (
         <>
-            <div className='App' data-testid='app-test'>
-                <SearchLocation onSearch={handleSearch} />
-                <DashboardPanels searchedLocation={weatherData || null} />
+            <div className='flex gap-4' data-testid='app-test'>
+                <aside className='bg-color3 rounded-lg p-2'>Toolbar</aside>
+                <main className='flex flex-col gap-4 grow'>
+                    <header className='flex gap-4 justify-between'>
+                        <div className='flex gap-4'>
+                            <img
+                                src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
+                                className='rounded-full w-12 h-fit'
+                            />
+                            <div className='flex flex-col justify-center'>
+                                <small>Hi Nick</small>
+                                <h3>{formattedDate}</h3>
+                            </div>
+                        </div>
+                        <SearchLocation onSearch={handleSearch} />
+                    </header>
+                    <section className=''>
+                        <DashboardPanels
+                            searchedLocation={weatherData || null}
+                        />
+                    </section>
+                </main>
+                <aside className='flex flex-col gap-4'>
+                    <div className='flex'>
+                        <div>Unit switcher</div>
+                    </div>
+                    <div className='rounded-lg bg-color3 p-3'>Other stuff</div>
+                </aside>
             </div>
         </>
     );
