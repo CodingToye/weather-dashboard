@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "cd client && npm test",
+        "test": "cd client && npm test -- --watchAll=false",
         "lint": "eslint ."
     },
     "repository": {
