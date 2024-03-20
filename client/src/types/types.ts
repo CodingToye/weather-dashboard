@@ -1,11 +1,13 @@
 export interface WeatherData {
     location: {
         name: string;
+        country: string;
     };
 
     current: {
         temp_c: number;
         wind_mph: number;
+        humidity: number;
         condition: Conditions;
     };
 }
