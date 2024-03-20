@@ -5,10 +5,10 @@ describe('DashboardPanels', () => {
     afterEach(() => {
         cleanup();
     });
-    // test('DashboardPanels component renders', () => {
-    //     render(<DashboardPanels />);
+    test('DashboardPanels component renders', () => {
+        render(<DashboardPanels searchedLocation={null} />);
 
-    //     const comp = screen.getByTestId('dashboard-panels-test');
-    //     expect(comp).toBeInTheDocument();
-    // });
+        const comp = screen.getByTestId('dashboard-panels-test');
+        expect(comp).toBeInTheDocument();
+    });
 });
