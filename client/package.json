@@ -21,15 +21,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "test:coverage": "react-scripts test --coverage",
-        "prepare": "husky install",
         "lint": "eslint .",
         "generate-docs": "npx typedoc --out docs/ src/**/*.tsx"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
     },
     "jest": {
         "coveragePathIgnorePatterns": [
@@ -37,19 +30,6 @@
             "reportWebVitals.ts",
             "index.tsx"
         ]
-    },
-    "lint-staged": {
-        "*.{js,jsx,ts,tsx}": [
-            "npm run lint",
-            "npm test",
-            "git add"
-        ]
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged",
-            "pre-push": "npm test -- --watchAll=false"
-        }
     },
     "browserslist": {
         "production": [
@@ -65,8 +45,6 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-        "husky": "^9.0.11",
-        "lint-staged": "^15.2.2",
         "typedoc": "^0.25.12"
     }
 }
