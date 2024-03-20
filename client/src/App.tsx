@@ -36,10 +36,12 @@ function App() {
     };
 
     return (
-        <div className='App' data-testid='app-test'>
-            <SearchLocation onSearch={handleSearch} />
-            <DashboardPanels searchedLocation={weatherData || null} />
-        </div>
+        <>
+            <div className='App' data-testid='app-test'>
+                <SearchLocation onSearch={handleSearch} />
+                <DashboardPanels searchedLocation={weatherData || null} />
+            </div>
+        </>
     );
 }
 
