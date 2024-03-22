@@ -2,7 +2,6 @@ import React from 'react';
 import { SearchLocationProps } from '../../types/types';
 import Input from '../../components/Input';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 /**
  * SearchLocation component.
@@ -18,6 +17,7 @@ interface IFormValues {
 const SearchLocation: React.FC<SearchLocationProps> = ({ onSearch }) => {
     const onSubmit: SubmitHandler<IFormValues> = (formData) => {
         console.log(formData);
+        reset();
         if (formData && formData.searchLocation) {
             const { searchLocation } = formData;
             if (searchLocation.trim() !== '') {
@@ -26,7 +26,7 @@ const SearchLocation: React.FC<SearchLocationProps> = ({ onSearch }) => {
         }
     };
 
-    const { register, handleSubmit } = useForm<IFormValues>({
+    const { register, handleSubmit, reset } = useForm<IFormValues>({
         mode: 'onSubmit',
     });
     return (
@@ -36,7 +36,7 @@ const SearchLocation: React.FC<SearchLocationProps> = ({ onSearch }) => {
                     name='searchLocation'
                     placeholder='Search location or postcode'
                     register={register}
-                    icon={<MagnifyingGlassIcon className='w-4' />}
+                    icon='material-symbols-outlined'
                 />
             </form>
         </section>

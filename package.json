@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "cd client && npm test -- --watchAll=false",
-        "lint": "cd client && eslint ."
+        "lint": "cd client && npm run lint"
     },
     "repository": {
         "type": "git",

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
 import SearchLocation from './features/SearchLocation';
 import DashboardPanels from './features/DashboardPanels';
-import { WeatherData } from './types/types';
+import AstroPanels from './features/AstroPanels';
+import { CurrentWeather } from './types/types';
 import './App.css';
 
 function App() {
-    const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+    const [weatherData, setWeatherData] = useState<CurrentWeather | null>(null);
 
     useEffect(() => {
         fetchWeather('New York');
@@ -14,16 +16,38 @@ function App() {
     const fetchWeather = async (city: string) => {
         try {
             const timestamp = Date.now();
-            const response = await fetch(
-                `http://localhost:5000/api/weather?city=${city}&_=${timestamp}`
+            const currentResponse = await fetch(
+                `http://localhost:5000/api/current?city=${city}&_=${timestamp}`
             );
-            if (response.ok) {
-                const data = await response.json();
-                setWeatherData(data);
+            if (currentResponse.ok) {
+                const currentData = await currentResponse.json();
+                setWeatherData(currentData);
             } else {
                 console.error(
-                    'Failed to fetch weather data:',
-                    response.statusText
+                    'Failed to fetch currentweather data:',
+                    currentResponse.statusText
+                );
+            }
+
+            const forecastResponse = await fetch(
+                `http://localhost:5000/api/forecast?city=${city}&_=${timestamp}`
+            );
+            if (forecastResponse.ok) {
+                const forecastData = await forecastResponse.json();
+                console.log(forecastData);
+                setWeatherData((prevData) => {
+                    if (!prevData) {
+                        return null;
+                    }
+                    return {
+                        ...prevData,
+                        forecast: forecastData.forecast,
+                    };
+                });
+            } else {
+                console.error(
+                    'Failed to fetch forecasted weather data:',
+                    forecastResponse.statusText
                 );
             }
         } catch (error) {
@@ -36,6 +60,7 @@ function App() {
     };
 
     const currentDate = new Date();
+    console.log(typeof currentDate);
     const formattedDate = currentDate.toLocaleDateString('en-US', {
         weekday: 'short',
         year: 'numeric',
@@ -46,8 +71,8 @@ function App() {
     return (
         <>
             <div className='flex gap-4' data-testid='app-test'>
-                <aside className='bg-color3 rounded-lg p-2'>Toolbar</aside>
-                <main className='flex flex-col gap-4 grow'>
+                {/* <aside className='bg-color3 rounded-lg p-2'>Toolbar</aside> */}
+                <main className='flex flex-col gap-4 grow overflow-hidden'>
                     <header className='flex gap-4 justify-between'>
                         <div className='flex gap-4'>
                             <img
@@ -56,7 +81,7 @@ function App() {
                             />
                             <div className='flex flex-col justify-center'>
                                 <small>Hi Nick</small>
-                                <h3>{formattedDate}</h3>
+                                <h4>{formattedDate}</h4>
                             </div>
                         </div>
                         <SearchLocation onSearch={handleSearch} />
@@ -68,10 +93,9 @@ function App() {
                     </section>
                 </main>
                 <aside className='flex flex-col gap-4'>
-                    <div className='flex'>
-                        <div>Unit switcher</div>
-                    </div>
-                    <div className='rounded-lg bg-color3 p-3'>Other stuff</div>
+                    <section>
+                        <AstroPanels searchedLocation={weatherData || null} />
+                    </section>
                 </aside>
             </div>
         </>

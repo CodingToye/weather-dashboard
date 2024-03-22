@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,6 +35,10 @@
         @apply text-2xl;
     }
 
+    h4 {
+        @apply text-xl;
+    }
+
     small {
         @apply text-xs;
         @apply text-color2/50;
@@ -50,4 +55,27 @@
         @apply shadow-lg;
         @apply p-4;
     }
+
+    .c-toggle {
+        /* outline: 1px solid white; */
+    }
+
+    .c-toggle input:checked {
+        @apply bg-color1;
+    }
+
+    .c-toggle input:checked ~ span:last-child {
+        --tw-translate-x: 2.25rem;
+    }
+}
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.gmnoprint,
+.gm-fullscreen-control {
+    display: none;
 }
