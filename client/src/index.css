@@ -9,9 +9,7 @@
         @apply text-color2;
         @apply p-8;
     }
-}
 
-@layer base {
     .u-scaffold {
         @apply p-2;
         @apply bg-scaffold;
@@ -67,15 +65,15 @@
     .c-toggle input:checked ~ span:last-child {
         --tw-translate-x: 2.25rem;
     }
+
+    .gmnoprint,
+    .gm-fullscreen-control {
+        display: none;
+    }
 }
 
 @layer utilities {
     .no-scrollbar::-webkit-scrollbar {
         display: none;
     }
-}
-
-.gmnoprint,
-.gm-fullscreen-control {
-    display: none;
 }

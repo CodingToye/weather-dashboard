@@ -1,18 +1,11 @@
 import { Forecast, ForecastHour, CurrentWeather } from '../../types/types';
+import { getHour } from '../../utils/dates.utils';
 
 interface HourlyForecastProps {
     forecast: Forecast;
     unit: string;
     location: CurrentWeather['location'];
 }
-
-const getHour = (date: string) => {
-    const dateObj = new Date(date);
-    return dateObj.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        hour12: false,
-    });
-};
 
 const HourlyForecast: React.FC<HourlyForecastProps> = ({
     forecast,

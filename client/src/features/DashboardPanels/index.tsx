@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import { DashboardPanelsProps } from '../../types/types';
 import AllForecastDates from './AllForecastDates';
+import { getTime } from '../../utils/dates.utils';
 import HourlyForecast from './HourlyForecast';
 // import LocalMap from './LocalMap';
 import UnitSwitcher from './UnitSwitcher';
 
 import GaugeChart from 'react-gauge-chart';
-
-const getTime = (date: string) => {
-    const dateObj = new Date(date);
-    return dateObj.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-    });
-};
 
 const DashboardPanels: React.FC<DashboardPanelsProps> = ({
     searchedLocation,

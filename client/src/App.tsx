@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react';
 import SearchLocation from './features/SearchLocation';
 import DashboardPanels from './features/DashboardPanels';
 import AstroPanels from './features/AstroPanels';
+import { formatCurrentDate } from './utils/dates.utils';
 import { CurrentWeather } from './types/types';
 import './App.css';
 
 function App() {
     const [weatherData, setWeatherData] = useState<CurrentWeather | null>(null);
+    const currentDate = formatCurrentDate();
 
     useEffect(() => {
         fetchWeather('New York');
@@ -59,15 +61,6 @@ function App() {
         fetchWeather(city);
     };
 
-    const currentDate = new Date();
-    console.log(typeof currentDate);
-    const formattedDate = currentDate.toLocaleDateString('en-US', {
-        weekday: 'short',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-
     return (
         <>
             <div className='flex gap-4' data-testid='app-test'>
@@ -81,7 +74,7 @@ function App() {
                             />
                             <div className='flex flex-col justify-center'>
                                 <small>Hi Nick</small>
-                                <h4>{formattedDate}</h4>
+                                <h4>{currentDate}</h4>
                             </div>
                         </div>
                         <SearchLocation onSearch={handleSearch} />

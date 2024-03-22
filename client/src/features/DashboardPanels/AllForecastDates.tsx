@@ -1,4 +1,5 @@
 import React from 'react';
+import { getDay } from '../../utils/dates.utils';
 
 import Icon from '../../components/Icon';
 
@@ -8,13 +9,6 @@ interface AllForecastDatesProps {
     forecast: Forecast;
     unit: string;
 }
-
-const getDay = (date: string) => {
-    const dateObj = new Date(date);
-    return dateObj.toLocaleDateString('en-US', {
-        weekday: 'long',
-    });
-};
 
 const AllForecastDates: React.FC<AllForecastDatesProps> = ({
     forecast,
