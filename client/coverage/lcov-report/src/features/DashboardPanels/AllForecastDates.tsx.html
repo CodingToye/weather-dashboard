@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/types/types.ts</title>
+    <title>Code coverage report for src/features/DashboardPanels/AllForecastDates.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/types</a> types.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/features/DashboardPanels</a> AllForecastDates.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -134,7 +134,21 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,15 +159,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,77 +225,99 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export interface CurrentWeather {
-    location: {
-        name: string;
-        country: string;
-        localtime: string;
-        lat: number;
-        lon: number;
-    };
-    current: {
-        temp_c: number;
-        temp_f: number;
-        wind_mph: number;
-        humidity: number;
-        condition: Conditions;
-    };
-    forecast: {
-        forecastday: ForecastDay[];
-    };
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+&nbsp;
+import Icon from '../../components/Icon';
+&nbsp;
+import { Forecast, ForecastDay } from '../../types/types';
+&nbsp;
+interface AllForecastDatesProps {
+    forecast: Forecast;
+    unit: string;
 }
 &nbsp;
-export interface Forecast {
-    forecastday: ForecastDay[];
-    // forecasthour: ForecastHour[];
-}
+const getDay = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(d</span>ate: string) =&gt; {</span>
+    const dateObj = <span class="cstat-no" title="statement not covered" >new Date(date);</span>
+<span class="cstat-no" title="statement not covered" >    return dateObj.toLocaleDateString('en-US', {</span>
+        weekday: 'long',
+    });
+};
 &nbsp;
-export interface ForecastDay {
-    date: string;
-    day: Day;
-    hour: ForecastHour[];
-    astro: Astro;
-}
+const AllForecastDates: React.FC&lt;AllForecastDatesProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
+    forecast,
+    unit,
+}) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return (</span>
+        &lt;&gt;
+            {forecast.forecastday.map(<span class="fstat-no" title="function not covered" >(x</span>: ForecastDay, i: number) =&gt; (
+<span class="cstat-no" title="statement not covered" >                &lt;div</span>
+                    key={i}
+                    className='flex flex-col gap-4 items-center bg-color1/30 text-color2 rounded-lg py-4 border-color2/20 border border-dashed'
+                &gt;
+                    &lt;h3 className='text-color6'&gt;{getDay(x.date)}&lt;/h3&gt;
+                    &lt;img
+                        src={x.day.condition.icon}
+                        alt='icon'
+                        className='w-16'
+                    /&gt;
+                    &lt;div className='flex flex-row justify-between items-center w-full p-4 mb-4'&gt;
+                        &lt;small&gt;
+                            min{' '}
+                            {Math.round(
+                                unit === 'C' ? x.day.mintemp_c : x.day.mintemp_f
+                            )}
+                            &amp;deg;{unit}
+                        &lt;/small&gt;
+                        &lt;Icon iconName='thermostat' /&gt;
+                        &lt;small&gt;
+                            max{' '}
+                            {Math.round(
+                                unit === 'C' ? x.day.maxtemp_c : x.day.mintemp_f
+                            )}
+                            &amp;deg;{unit}
+                        &lt;/small&gt;
+                    &lt;/div&gt;
+                    &lt;div className='flex flex-col gap-1 w-full px-4'&gt;
+                        &lt;small
+                            className={`flex items-center ${
+                                x.day.daily_chance_of_rain &gt; 50
+                                    ? 'text-color7'
+                                    : ''
+                            }`}
+                        &gt;
+                            &lt;Icon
+                                iconName='humidity_high'
+                                extraClasses='mr-2 text-sm'
+                            /&gt;
+                            Chance of rain: {x.day.daily_chance_of_rain}%
+                        &lt;/small&gt;
+                        &lt;small
+                            className={`flex items-center ${
+                                x.day.daily_chance_of_snow ? 'text-white' : ''
+                            }`}
+                        &gt;
+                            &lt;Icon
+                                iconName='weather_snowy'
+                                extraClasses='mr-2 text-sm'
+                            /&gt;
+                            Chance of snow: {x.day.daily_chance_of_snow}%
+                        &lt;/small&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            ))}
+        &lt;/&gt;
+    );
+};
 &nbsp;
-export interface ForecastHour {
-    time: string;
-    temp_c: number;
-    temp_f: number;
-    condition: Conditions;
-}
-&nbsp;
-export interface Day {
-    mintemp_c: number;
-    maxtemp_c: number;
-    mintemp_f: number;
-    maxtemp_f: number;
-    condition: Conditions;
-    daily_chance_of_rain: number;
-    daily_chance_of_snow: number;
-}
-&nbsp;
-export interface Conditions {
-    text: string;
-    icon: string;
-}
-&nbsp;
-export interface SearchLocationProps {
-    /** The location the user wishes to search. */
-    onSearch: (city: string) =&gt; void;
-}
-&nbsp;
-export interface DashboardPanelsProps {
-    searchedLocation: CurrentWeather | null;
-}
-&nbsp;
-export interface AstroPanelProps {
-    searchedLocation: CurrentWeather | null;
-}
-&nbsp;
-export interface Astro {
-    sunrise: string;
-    sunset: string;
-}
+export default AllForecastDates;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -285,14 +327,14 @@ export interface Astro {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2024-03-22T09:30:08.562Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     
