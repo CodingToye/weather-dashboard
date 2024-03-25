@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
@@ -160,8 +160,7 @@
 <a name='L95'></a><a href='#L95'>95</a>
 <a name='L96'></a><a href='#L96'>96</a>
 <a name='L97'></a><a href='#L97'>97</a>
-<a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -199,16 +198,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,12 +213,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -263,7 +261,7 @@
 &nbsp;
 import SearchLocation from './features/SearchLocation';
 import DashboardPanels from './features/DashboardPanels';
-import AstroPanels from './features/AstroPanels';
+// import AstroPanels from './features/AstroPanels';
 import { formatCurrentDate } from './utils/dates.utils';
 import { CurrentWeather } from './types/types';
 import './App.css';
@@ -273,7 +271,7 @@ function <span class="fstat-no" title="function not covered" >App(</span>) {
     const currentDate = <span class="cstat-no" title="statement not covered" >formatCurrentDate();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        fetchWeather('New York');</span>
+<span class="cstat-no" title="statement not covered" >        fetchWeather('Chester');</span>
     }, []);
 &nbsp;
     const fetchWeather = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (city: string) =&gt; {</span>
@@ -297,7 +295,7 @@ function <span class="fstat-no" title="function not covered" >App(</span>) {
             );
 <span class="cstat-no" title="statement not covered" >            if (forecastResponse.ok) {</span>
                 const forecastData = <span class="cstat-no" title="statement not covered" >await forecastResponse.json();</span>
-<span class="cstat-no" title="statement not covered" >                console.log(forecastData);</span>
+                // console.log(forecastData);
 <span class="cstat-no" title="statement not covered" >                setWeatherData(<span class="fstat-no" title="function not covered" >(p</span>revData) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                    if (!prevData) {</span>
 <span class="cstat-no" title="statement not covered" >                        return null;</span>
@@ -325,9 +323,8 @@ function <span class="fstat-no" title="function not covered" >App(</span>) {
 <span class="cstat-no" title="statement not covered" >    return (</span>
         &lt;&gt;
             &lt;div className='flex gap-4' data-testid='app-test'&gt;
-                {/* &lt;aside className='bg-color3 rounded-lg p-2'&gt;Toolbar&lt;/aside&gt; */}
                 &lt;main className='flex flex-col gap-4 grow overflow-hidden'&gt;
-                    &lt;header className='flex gap-4 justify-between'&gt;
+                    &lt;header className='flex gap-4 justify-between mb-8'&gt;
                         &lt;div className='flex gap-4'&gt;
                             &lt;img
                                 src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
@@ -346,11 +343,11 @@ function <span class="fstat-no" title="function not covered" >App(</span>) {
                         /&gt;
                     &lt;/section&gt;
                 &lt;/main&gt;
-                &lt;aside className='flex flex-col gap-4'&gt;
+                {/* &lt;aside className='flex flex-col gap-4'&gt;
                     &lt;section&gt;
                         &lt;AstroPanels searchedLocation={weatherData || null} /&gt;
                     &lt;/section&gt;
-                &lt;/aside&gt;
+                &lt;/aside&gt; */}
             &lt;/div&gt;
         &lt;/&gt;
     );
@@ -364,7 +361,7 @@ export default App;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-22T10:00:28.511Z
+                at 2024-03-25T16:07:35.881Z
             </div>
         <script src="../prettify.js"></script>
         <script>

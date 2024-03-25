@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -134,15 +134,7 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,14 +154,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,32 +226,24 @@ const AllForecastDates: React.FC&lt;AllForecastDatesProps&gt; = <span class="cst
             {forecast.forecastday.map(<span class="fstat-no" title="function not covered" >(x</span>: ForecastDay, i: number) =&gt; (
 <span class="cstat-no" title="statement not covered" >                &lt;div</span>
                     key={i}
-                    className='flex flex-col gap-4 items-center bg-color1/30 text-color2 rounded-lg py-4 border-color2/20 border border-dashed'
+                    className='flex flex-col gap-4 items-center justify-between bg-color3 text-color2 rounded-lg py-4 '
                 &gt;
-                    &lt;h3 className='text-color6'&gt;{getDay(x.date)}&lt;/h3&gt;
+                    &lt;h3 className='text-color6 text-sm uppercase'&gt;
+                        {getDay(x.date)}
+                    &lt;/h3&gt;
                     &lt;img
                         src={x.day.condition.icon}
                         alt='icon'
                         className='w-16'
                     /&gt;
-                    &lt;div className='flex flex-row justify-between items-center w-full p-4 mb-4'&gt;
-                        &lt;small&gt;
-                            min{' '}
-                            {Math.round(
-                                unit === 'C' ? x.day.mintemp_c : x.day.mintemp_f
-                            )}
-                            &amp;deg;{unit}
-                        &lt;/small&gt;
-                        &lt;Icon iconName='thermostat' /&gt;
-                        &lt;small&gt;
-                            max{' '}
-                            {Math.round(
-                                unit === 'C' ? x.day.maxtemp_c : x.day.mintemp_f
-                            )}
-                            &amp;deg;{unit}
-                        &lt;/small&gt;
-                    &lt;/div&gt;
-                    &lt;div className='flex flex-col gap-1 w-full px-4'&gt;
+                    &lt;small className='text-base text-color2'&gt;
+                        {Math.round(
+                            unit === 'C' ? x.day.avgtemp_c : x.day.avgtemp_f
+                        )}
+                        &amp;deg;{unit}
+                    &lt;/small&gt;
+&nbsp;
+                    {/* &lt;div className='flex flex-col gap-1 w-full px-4'&gt;
                         &lt;small
                             className={`flex items-center ${
                                 x.day.daily_chance_of_rain &gt; 50
@@ -279,7 +255,7 @@ const AllForecastDates: React.FC&lt;AllForecastDatesProps&gt; = <span class="cst
                                 iconName='humidity_high'
                                 extraClasses='mr-2 text-sm'
                             /&gt;
-                            Chance of rain: {x.day.daily_chance_of_rain}%
+                            Rain: {x.day.daily_chance_of_rain}%
                         &lt;/small&gt;
                         &lt;small
                             className={`flex items-center ${
@@ -290,9 +266,9 @@ const AllForecastDates: React.FC&lt;AllForecastDatesProps&gt; = <span class="cst
                                 iconName='weather_snowy'
                                 extraClasses='mr-2 text-sm'
                             /&gt;
-                            Chance of snow: {x.day.daily_chance_of_snow}%
+                            Snow: {x.day.daily_chance_of_snow}%
                         &lt;/small&gt;
-                    &lt;/div&gt;
+                    &lt;/div&gt; */}
                 &lt;/div&gt;
             ))}
         &lt;/&gt;
@@ -307,7 +283,7 @@ export default AllForecastDates;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-22T10:00:28.511Z
+                at 2024-03-23T10:10:04.023Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Forecast, ForecastHour, CurrentWeather } from '../../types/types';
 import { getHour } from '../../utils/dates.utils';
 
@@ -15,47 +16,80 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({
     if (forecast.forecastday.length === 0) {
         return null;
     }
-    const getLocalTime = location?.localtime ? getHour(location.localtime) : '';
-    const firstDay = forecast.forecastday[0];
+
+    // Get the local time from the location
+    const localTime = location?.localtime;
+
+    // Find the index of the current hour in the forecast data
+    let currentIndex = -1;
+    if (localTime) {
+        const currentHour = getHour(localTime, false);
+        currentIndex = forecast.forecastday[0].hour.findIndex(
+            (hour: ForecastHour) => getHour(hour.time, false) === currentHour
+        );
+    }
+
+    // Reorder the forecast data starting from the current hour
+    const reorderedHourlyForecast = [
+        ...forecast.forecastday[0].hour.slice(currentIndex),
+        ...forecast.forecastday[0].hour.slice(0, currentIndex),
+    ];
+
+    // console.log(localTime);
+
     return (
         <>
-            <div className='flex gap-2 py-4 overflow-x-auto no-scrollbar'>
-                {firstDay.hour?.length ? (
-                    firstDay.hour?.map((hour: ForecastHour, j: number) => (
-                        <div
-                            key={j}
-                            className={`flex flex-col items-center shrink-0 w-24 ${
-                                getLocalTime === getHour(hour.time)
-                                    ? 'bg-color6'
-                                    : 'bg-color1/30 border'
-                            } rounded-lg p-4 border-color2/20  border-dashed`}
-                        >
-                            <span
-                                className={`text-lg ${
-                                    getLocalTime === getHour(hour.time)
-                                        ? 'text-color2'
-                                        : 'text-color6'
-                                } mb-4`}
-                            >
-                                {getHour(hour.time)}
-                            </span>
-                            <span className='text-xs'>
-                                {Math.round(
-                                    unit === 'C' ? hour.temp_c : hour.temp_f
-                                )}
-                                &deg;{unit}
-                            </span>
-                            <img
-                                src={hour.condition.icon}
-                                alt='icon'
-                                className='w-16'
-                            />
-                        </div>
-                    ))
-                ) : (
-                    <div>No hourly forecast available for this day</div>
-                )}
-            </div>
+            <section>
+                <h1 className='text-base'>Today</h1>
+                <div className='flex gap-2 py-4 overflow-x-auto no-scrollbar'>
+                    {reorderedHourlyForecast.length ? (
+                        reorderedHourlyForecast.map(
+                            (hour: ForecastHour, j: number) => (
+                                <div
+                                    key={j}
+                                    className={`flex flex-col justify-between gap-4 items-center shrink-0 w-24 ${
+                                        j === 0
+                                            ? 'bg-color6'
+                                            : 'bg-color1/30 border'
+                                    } rounded-lg p-4 border-color2/20  border-dashed`}
+                                >
+                                    <span
+                                        className={`text-sm ${
+                                            getHour(localTime, false) !==
+                                                getHour(hour.time, false) &&
+                                            'lowercase'
+                                        } ${
+                                            j === 0
+                                                ? 'text-color2'
+                                                : 'text-color2'
+                                        }`}
+                                    >
+                                        {getHour(localTime, false) ===
+                                        getHour(hour.time, false)
+                                            ? 'Now'
+                                            : getHour(hour.time, false)}
+                                    </span>
+                                    <img
+                                        src={hour.condition.icon}
+                                        alt='icon'
+                                        className='w-16'
+                                    />
+                                    <span className='text-xs'>
+                                        {Math.round(
+                                            unit === 'C'
+                                                ? hour.temp_c
+                                                : hour.temp_f
+                                        )}
+                                        &deg;{unit}
+                                    </span>
+                                </div>
+                            )
+                        )
+                    ) : (
+                        <div>No hourly forecast available for this day</div>
+                    )}
+                </div>
+            </section>
         </>
     );
 };
