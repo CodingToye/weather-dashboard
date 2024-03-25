@@ -1,4 +1,6 @@
 @import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0';
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,10 +10,9 @@
         @apply bg-color1;
         @apply text-color2;
         @apply p-8;
+        font-family: 'Roboto';
     }
-}
 
-@layer base {
     .u-scaffold {
         @apply p-2;
         @apply bg-scaffold;
@@ -22,6 +23,12 @@
             @apply p-2;
             @apply m-2;
         }
+    }
+
+    h1,
+    h2,
+    h3 {
+        /* font-family: 'Oswald'; */
     }
 
     h2 {
@@ -67,15 +74,35 @@
     .c-toggle input:checked ~ span:last-child {
         --tw-translate-x: 2.25rem;
     }
+
+    .gmnoprint,
+    .gm-fullscreen-control {
+        display: none;
+    }
+
+    .compass {
+        font-family: sans-serif;
+    }
 }
 
 @layer utilities {
     .no-scrollbar::-webkit-scrollbar {
         display: none;
     }
-}
 
-.gmnoprint,
-.gm-fullscreen-control {
-    display: none;
+    .u-recharts-fix-overflow > svg {
+        overflow: visible;
+    }
+
+    .u-recharts-fix-overflow-ticks {
+        margin-left: -20px;
+    }
+
+    .fizz {
+        outline: 1px solid red;
+    }
+
+    .debug > * {
+        outline: 1px solid red;
+    }
 }

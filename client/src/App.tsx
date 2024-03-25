@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 import SearchLocation from './features/SearchLocation';
 import DashboardPanels from './features/DashboardPanels';
-import AstroPanels from './features/AstroPanels';
+// import AstroPanels from './features/AstroPanels';
+import { formatCurrentDate } from './utils/dates.utils';
 import { CurrentWeather } from './types/types';
 import './App.css';
 
 function App() {
     const [weatherData, setWeatherData] = useState<CurrentWeather | null>(null);
+    const currentDate = formatCurrentDate();
 
     useEffect(() => {
-        fetchWeather('New York');
+        fetchWeather('Chester');
     }, []);
 
     const fetchWeather = async (city: string) => {
@@ -34,7 +36,7 @@ function App() {
             );
             if (forecastResponse.ok) {
                 const forecastData = await forecastResponse.json();
-                console.log(forecastData);
+                // console.log(forecastData);
                 setWeatherData((prevData) => {
                     if (!prevData) {
                         return null;
@@ -59,21 +61,11 @@ function App() {
         fetchWeather(city);
     };
 
-    const currentDate = new Date();
-    console.log(typeof currentDate);
-    const formattedDate = currentDate.toLocaleDateString('en-US', {
-        weekday: 'short',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-
     return (
         <>
             <div className='flex gap-4' data-testid='app-test'>
-                {/* <aside className='bg-color3 rounded-lg p-2'>Toolbar</aside> */}
                 <main className='flex flex-col gap-4 grow overflow-hidden'>
-                    <header className='flex gap-4 justify-between'>
+                    <header className='flex gap-4 justify-between mb-8'>
                         <div className='flex gap-4'>
                             <img
                                 src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
@@ -81,7 +73,7 @@ function App() {
                             />
                             <div className='flex flex-col justify-center'>
                                 <small>Hi Nick</small>
-                                <h4>{formattedDate}</h4>
+                                <h4>{currentDate}</h4>
                             </div>
                         </div>
                         <SearchLocation onSearch={handleSearch} />
@@ -92,11 +84,11 @@ function App() {
                         />
                     </section>
                 </main>
-                <aside className='flex flex-col gap-4'>
+                {/* <aside className='flex flex-col gap-4'>
                     <section>
                         <AstroPanels searchedLocation={weatherData || null} />
                     </section>
-                </aside>
+                </aside> */}
             </div>
         </>
     );
