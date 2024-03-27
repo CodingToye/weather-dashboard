@@ -1,6 +1,7 @@
 import React from 'react';
 import { Forecast, ForecastHour, CurrentWeather } from '../../types/types';
 import { getHour } from '../../utils/dates.utils';
+import Panel from '../../containers/Panel';
 
 interface HourlyForecastProps {
     forecast: Forecast;
@@ -39,19 +40,21 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({
 
     return (
         <>
-            <section>
-                <h1 className='text-base'>Today</h1>
+            <Panel extraClasses='overflow-hidden'>
+                <header className='mb-0'>
+                    <h1>Forecast</h1>
+                </header>
                 <div className='flex gap-2 py-4 overflow-x-auto no-scrollbar'>
                     {reorderedHourlyForecast.length ? (
                         reorderedHourlyForecast.map(
                             (hour: ForecastHour, j: number) => (
                                 <div
                                     key={j}
-                                    className={`flex flex-col justify-between gap-4 items-center shrink-0 w-24 ${
+                                    className={`flex flex-col justify-between gap-4 items-center shrink-0 w-24 text-white ${
                                         j === 0
-                                            ? 'bg-color6'
-                                            : 'bg-color1/30 border'
-                                    } rounded-lg p-4 border-color2/20  border-dashed`}
+                                            ? 'bg-primary'
+                                            : 'bg-neutral-darkGrey dark:bg-neutral-darkGrey/30 border'
+                                    } rounded-lg p-4 border-white/20  border-dashed`}
                                 >
                                     <span
                                         className={`text-sm ${
@@ -60,8 +63,8 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({
                                             'lowercase'
                                         } ${
                                             j === 0
-                                                ? 'text-color2'
-                                                : 'text-color2'
+                                                ? 'text-white dark:text-white'
+                                                : 'text-white dark:text-white'
                                         }`}
                                     >
                                         {getHour(localTime, false) ===
@@ -89,7 +92,7 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({
                         <div>No hourly forecast available for this day</div>
                     )}
                 </div>
-            </section>
+            </Panel>
         </>
     );
 };

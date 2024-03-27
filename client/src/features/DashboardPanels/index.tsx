@@ -1,9 +1,5 @@
-import React, { useState } from 'react';
-import {
-    DashboardPanelsProps,
-    Forecast,
-    ForecastHour,
-} from '../../types/types';
+import React from 'react';
+import { DashboardPanelsProps, ForecastHour } from '../../types/types';
 import HeroPanel from './HeroPanel';
 import ForecastPanel from './ForecastPanel';
 import WindPanel from './WindPanel';
@@ -13,42 +9,65 @@ import UVPanel from './UVPanel';
 import CloudPanel from './CloudPanel';
 import HumidityPanel from './HumidityPanel';
 
-import { getTime } from '../../utils/dates.utils';
-import HourlyForecast from './HourlyForecast';
-// import LocalMap from './LocalMap';
-import UnitSwitcher from './UnitSwitcher';
-
 const DashboardPanels: React.FC<DashboardPanelsProps> = ({
     searchedLocation,
+    colorTheme,
+    tempUnit,
+    speedUnit,
+    measurementUnit,
 }) => {
-    const { location, current, forecast } = searchedLocation || {};
-    const { temp_c, temp_f, wind_mph, wind_degree, humidity } = current || {};
-    const { icon } = current?.condition || {};
-    // const lat = location?.lat ?? 0;
-    // const lon = location?.lon ?? 0;
+    const { current, forecast } = searchedLocation || {};
+    const { humidity } = current || {};
 
-    const [unit, setUnit] = useState('C');
-
-    const handleUnitChange = (newUnit: string) => {
-        setUnit(newUnit);
-    };
+    if (!forecast) {
+        return null; // or render a loading indicator
+    }
 
     return (
         <>
             <div
-                className='grid grid-cols-2 gap-8'
+                className='grid lg:grid-cols-2 gap-8 w-full'
                 data-testid='dashboard-panels-test'
             >
-                <div className='flex flex-col gap-8'>
+                <div className='flex flex-col grow gap-8 order-1'>
                     {searchedLocation && (
                         <HeroPanel
                             searchedLocation={searchedLocation}
-                            unit={unit}
+                            tempUnit={tempUnit}
                             forecast={forecast}
+                            colorTheme={colorTheme}
                         />
                     )}
-                    <div className=' grid grid-cols-2 gap-8'>
+                    <div className='grid lg:grid-cols-4 gap-8'>
                         {searchedLocation && forecast && (
+                            <>
+                                <CloudPanel
+                                    searchedLocation={searchedLocation}
+                                    colorTheme={colorTheme}
+                                />
+                                {humidity && (
+                                    <HumidityPanel
+                                        humidity={humidity}
+                                        colorTheme={colorTheme}
+                                    />
+                                )}
+
+                                <RainPanel
+                                    forecast={forecast}
+                                    searchedLocation={searchedLocation}
+                                    measurementUnit={measurementUnit}
+                                    colorTheme={colorTheme}
+                                />
+                                <SnowPanel
+                                    forecast={forecast}
+                                    searchedLocation={searchedLocation}
+                                    colorTheme={colorTheme}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <div className='grid lg:grid-cols-2 gap-8'>
+                        {searchedLocation && (
                             <>
                                 <WindPanel
                                     searchedLocation={searchedLocation}
@@ -60,32 +79,23 @@ const DashboardPanels: React.FC<DashboardPanelsProps> = ({
                                             forecast?.forecastday[0]?.hour[0],
                                         ].filter(Boolean) as ForecastHour[]
                                     }
+                                    speedUnit={speedUnit}
+                                    colorTheme={colorTheme}
                                 />
-                                <div className='grid grid-cols-2 gap-8'>
-                                    <RainPanel
-                                        forecast={forecast}
-                                        searchedLocation={searchedLocation}
-                                    />
-                                    <SnowPanel
-                                        forecast={forecast}
-                                        searchedLocation={searchedLocation}
-                                    />
-                                </div>
+                                <UVPanel
+                                    forecast={forecast}
+                                    searchedLocation={searchedLocation}
+                                    colorTheme={colorTheme}
+                                />
                             </>
                         )}
-                        {searchedLocation && (
-                            <UVPanel searchedLocation={searchedLocation} />
-                        )}
-                        <CloudPanel />
-                        {humidity && <HumidityPanel humidity={humidity} />}
-                        <div className='c-panel'>Another Panel...</div>
                     </div>
                 </div>
-                <div>
+                <div className='overflow-hidden order-2'>
                     {searchedLocation && (
                         <ForecastPanel
                             forecast={forecast}
-                            unit={unit}
+                            unit={tempUnit}
                             searchedLocation={searchedLocation}
                         />
                     )}

@@ -13,12 +13,13 @@ export interface CurrentWeather {
         feelslike_c: number;
         feelslike_f: number;
         wind_mph: number;
-        wind_kmh: number;
+        wind_kph: number;
         wind_dir: string;
         wind_degree: number;
         humidity: number;
         condition: Conditions;
         uv: number;
+        cloud: number;
     };
     forecast: {
         forecastday: ForecastDay[];
@@ -42,6 +43,7 @@ export interface ForecastHour {
     temp_c: number;
     temp_f: number;
     wind_mph: number;
+    wind_kph: number;
     condition: Conditions;
 }
 
@@ -55,6 +57,10 @@ export interface Day {
     condition: Conditions;
     daily_chance_of_rain: number;
     daily_chance_of_snow: number;
+    totalprecip_mm: number;
+    totalprecip_in: number;
+    totalsnow_cm: number;
+    uv: number;
 }
 
 export interface Conditions {
@@ -70,6 +76,11 @@ export interface SearchLocationProps {
 export interface DashboardPanelsProps {
     searchedLocation: CurrentWeather | null;
     forecast?: Forecast | undefined;
+    fetchWeather: (city: string) => Promise<void>;
+    colorTheme: string;
+    tempUnit: string;
+    speedUnit: string;
+    measurementUnit: string;
 }
 
 export interface HeroPanelprops {

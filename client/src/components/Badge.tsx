@@ -1,14 +1,20 @@
 interface BadgeProps {
     children: React.ReactNode;
-    color: string;
+    bgColor: string;
+    textColor: string;
     active?: boolean;
 }
 
-const Badge: React.FC<BadgeProps> = ({ children, color, active }) => {
+const Badge: React.FC<BadgeProps> = ({
+    children,
+    bgColor,
+    textColor,
+    active,
+}) => {
     return (
         <span
-            className={`bg-${
-                active ? color : 'color1 opacity-10'
+            className={`bg-${active ? bgColor : ' opacity-10'} text-${
+                active ? textColor : 'darkGrey opacity-50'
             } p-1 rounded text-xs`}
         >
             {children}
