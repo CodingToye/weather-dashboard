@@ -7,22 +7,13 @@
 
 @layer base {
     body {
-        @apply bg-color1;
-        @apply text-color2;
+        @apply dark:bg-neutral-darkGrey;
+        @apply bg-neutral-lightGrey;
+        @apply dark:text-white;
+        @apply text-neutral-darkGrey;
         @apply p-8;
+        @apply pt-0;
         font-family: 'Roboto';
-    }
-
-    .u-scaffold {
-        @apply p-2;
-        @apply bg-scaffold;
-
-        > *,
-        > * > * {
-            outline: 1px solid white;
-            @apply p-2;
-            @apply m-2;
-        }
     }
 
     h1,
@@ -48,7 +39,6 @@
 
     small {
         @apply text-xs;
-        @apply text-color2/50;
     }
 
     img {
@@ -57,45 +47,19 @@
     }
 
     .c-panel {
-        @apply bg-color3;
+        @apply dark:bg-neutral-midGrey;
+        @apply bg-white;
+        @apply dark:text-white;
+        @apply text-neutral-midGrey;
         @apply rounded-lg;
-        @apply shadow-lg;
+        /* @apply shadow-lg; */
         @apply p-4;
-    }
-
-    .c-toggle {
-        /* outline: 1px solid white; */
-    }
-
-    .c-toggle input:checked {
-        @apply bg-color1;
-    }
-
-    .c-toggle input:checked ~ span:last-child {
-        --tw-translate-x: 2.25rem;
-    }
-
-    .gmnoprint,
-    .gm-fullscreen-control {
-        display: none;
-    }
-
-    .compass {
-        font-family: sans-serif;
     }
 }
 
 @layer utilities {
     .no-scrollbar::-webkit-scrollbar {
         display: none;
-    }
-
-    .u-recharts-fix-overflow > svg {
-        overflow: visible;
-    }
-
-    .u-recharts-fix-overflow-ticks {
-        margin-left: -20px;
     }
 
     .fizz {
@@ -106,3 +70,18 @@
         outline: 1px solid red;
     }
 }
+
+/* @media (min-width: 1024px) {
+    .u-recharts-fix-overflow > svg {
+        overflow: visible;
+    }
+
+    .u-recharts-fix-overflow-ticks {
+        margin-left: -20px;
+    }
+
+    .u-recharts-100 {
+        outline: 1px solid red;
+        width: 100%;
+    }
+} */

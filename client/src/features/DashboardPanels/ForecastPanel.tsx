@@ -1,5 +1,6 @@
 import WeeklyForecast from './WeeklyForecast';
 import HourlyForecast from './HourlyForecast';
+import Panel from '../../containers/Panel';
 import { Forecast, CurrentWeather } from '../../types/types';
 
 interface ForecastProps {
@@ -15,8 +16,7 @@ const ForecastPanel: React.FC<ForecastProps> = ({
 }) => {
     return (
         <>
-            <div className=' c-panel flex flex-col gap-4'>
-                {/* <h4>7 Day Forecast</h4> */}
+            <div className='flex h-full flex-col gap-4 justify-between overflow-hidden'>
                 {forecast && (
                     <>
                         {searchedLocation && (

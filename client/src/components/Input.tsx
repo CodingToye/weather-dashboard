@@ -19,7 +19,7 @@ const Input: React.ForwardRefRenderFunction<
                 <>
                     <Icon
                         iconName='search'
-                        extraClasses='absolute left-2 top-1/2 -translate-y-1/2 w-16'
+                        extraClasses='text-white dark:text-neutral-darkGrey/50 w-16 absolute left-2 top-1/2 -translate-y-1/2'
                     />
                 </>
             )}
@@ -27,7 +27,7 @@ const Input: React.ForwardRefRenderFunction<
                 {...register(name)}
                 type='text'
                 name={name}
-                className={`text-color2 bg-color3 p-2 rounded-lg w-72 placeholder:text-color2/50 focus:placeholder:text-color2/0 focus:outline-none focus:shadow-blur transition-all ${
+                className={`text-white dark:text-neutral-darkGrey bg-neutral-midGrey dark:bg-white placeholder:text-white/50  dark:placeholder:text-neutral-darkGrey/50  focus:placeholder:text-white/50 outline-none focus:bg-primary focus:shadow-soft-secondary-outline dark:focus:shadow-soft-primary-outline focus:border-primary focus:outline-none p-2 w-full lg:w-72 rounded-lg transition-all ${
                     icon && 'pl-10'
                 }`}
                 placeholder={placeholder}

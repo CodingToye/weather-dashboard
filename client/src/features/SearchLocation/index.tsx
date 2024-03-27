@@ -16,7 +16,6 @@ interface IFormValues {
 
 const SearchLocation: React.FC<SearchLocationProps> = ({ onSearch }) => {
     const onSubmit: SubmitHandler<IFormValues> = (formData) => {
-        console.log(formData);
         reset();
         if (formData && formData.searchLocation) {
             const { searchLocation } = formData;
@@ -30,7 +29,10 @@ const SearchLocation: React.FC<SearchLocationProps> = ({ onSearch }) => {
         mode: 'onSubmit',
     });
     return (
-        <section data-testid='search-location-test'>
+        <section
+            data-testid='search-location-test'
+            className='w-full mb-4 lg:mb-0'
+        >
             <form onSubmit={handleSubmit(onSubmit)} className=''>
                 <Input
                     name='searchLocation'

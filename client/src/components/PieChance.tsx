@@ -9,10 +9,17 @@ interface CustomLabelProps {
 
 interface PieChanceProps {
     data: { name: string; value: number }[];
+    colorTheme?: string;
 }
 
-const PieChance: React.FC<PieChanceProps> = ({ data }) => {
-    const colors = ['#f2651d', 'rgba(0,0,0,.1'];
+const PieChance: React.FC<PieChanceProps> = ({ data, colorTheme }) => {
+    const darkColors = ['#f2651d', '#rgba(0,0,0,.1'];
+    const lightColors = ['#f2651d', '#rgba(0,0,0,.1'];
+
+    const colors = colorTheme === 'light' ? lightColors : darkColors;
+
+    const textColors = colorTheme === 'light' ? '#fff' : '#000';
+
     const keyValue = data[0].name;
     const renderCustomLabel = ({ cx, cy, percent, name }: CustomLabelProps) => {
         if (name === keyValue) {
@@ -20,7 +27,7 @@ const PieChance: React.FC<PieChanceProps> = ({ data }) => {
                 <text
                     x={cx}
                     y={cy}
-                    fill='white'
+                    fill={textColors}
                     textAnchor='middle'
                     dominantBaseline='central'
                 >
