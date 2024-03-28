@@ -16,7 +16,7 @@ const ForecastPanel: React.FC<ForecastProps> = ({
 }) => {
     return (
         <>
-            <div className='flex h-full flex-col gap-4 justify-between overflow-hidden'>
+            <div className='flex h-full flex-col gap-8 justify-between overflow-hidden'>
                 {forecast && (
                     <>
                         {searchedLocation && (
