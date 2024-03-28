@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && npm run build",
+    "build": "cd client && npm build",
     "test": "cd client && npm test -- --watchAll=false",
     "lint": "cd client && npm run lint"
   },
