@@ -206,9 +206,7 @@
 <a name='L141'></a><a href='#L141'>141</a>
 <a name='L142'></a><a href='#L142'>142</a>
 <a name='L143'></a><a href='#L143'>143</a>
-<a name='L144'></a><a href='#L144'>144</a>
-<a name='L145'></a><a href='#L145'>145</a>
-<a name='L146'></a><a href='#L146'>146</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L144'></a><a href='#L144'>144</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,150 +349,146 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState, useEffect } from 'react';
-import useDarkMode from './hooks/useDarkMode';
-import ModeSwitcher from './components/ModeSwitcher';
-import UnitSwitcher from './features/DashboardPanels/UnitSwitcher';
-import SearchLocation from './features/SearchLocation';
-import DashboardPanels from './features/DashboardPanels';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {useState, useEffect} from "react";
+import useDarkMode from "./hooks/useDarkMode";
+import ModeSwitcher from "./components/ModeSwitcher";
+import UnitSwitcher from "./features/DashboardPanels/UnitSwitcher";
+import SearchLocation from "./features/SearchLocation";
+import DashboardPanels from "./features/DashboardPanels";
 // import AstroPanels from './features/AstroPanels';
-import { formatCurrentDate } from './utils/dates.utils';
-import { CurrentWeather } from './types/types';
-import './App.css';
+import {formatCurrentDate} from "./utils/dates.utils";
+import {CurrentWeather} from "./types/types";
+import "./App.css";
 &nbsp;
 function App() {
-    const [colorTheme, setTheme] = useDarkMode();
-    const [weatherData, setWeatherData] = useState&lt;CurrentWeather | null&gt;(null);
-    const currentDate = formatCurrentDate();
+  const [colorTheme, setTheme] = useDarkMode();
+  const [weatherData, setWeatherData] = useState&lt;CurrentWeather | null&gt;(null);
+  const currentDate = formatCurrentDate();
 &nbsp;
-    useEffect(() =&gt; {
-        fetchWeather('Chester');
-    }, []);
+  useEffect(() =&gt; {
+    fetchWeather("Chester");
+  }, []);
 &nbsp;
-    const fetchWeather = async (city: string) =&gt; {
-        try {
-            const timestamp = Date.now();
-            const currentResponse = await fetch(
-                `http://localhost:5000/api/current?city=${city}&amp;_=${timestamp}`
-            );
-<span class="cstat-no" title="statement not covered" >            if (currentResponse.ok) {</span>
-                const currentData = <span class="cstat-no" title="statement not covered" >await currentResponse.json();</span>
-<span class="cstat-no" title="statement not covered" >                setWeatherData(currentData);</span>
-            } else {
-<span class="cstat-no" title="statement not covered" >                console.error(</span>
-                    'Failed to fetch currentweather data:',
-                    currentResponse.statusText
-                );
-            }
+  const fetchWeather = async (city: string) =&gt; {
+    try {
+      const timestamp = Date.now();
+      const currentResponse = await fetch(
+        `http://localhost:5000/api/current?city=${city}&amp;_=${timestamp}`
+      );
+<span class="cstat-no" title="statement not covered" >      if (currentResponse.ok) {</span>
+        const currentData = <span class="cstat-no" title="statement not covered" >await currentResponse.json();</span>
+<span class="cstat-no" title="statement not covered" >        setWeatherData(currentData);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        console.error(</span>
+          "Failed to fetch currentweather data:",
+          currentResponse.statusText
+        );
+      }
 &nbsp;
-            const forecastResponse = <span class="cstat-no" title="statement not covered" >await fetch(</span>
-                `http://localhost:5000/api/forecast?city=${city}&amp;_=${timestamp}`
-            );
-<span class="cstat-no" title="statement not covered" >            if (forecastResponse.ok) {</span>
-                const forecastData = <span class="cstat-no" title="statement not covered" >await forecastResponse.json();</span>
-                // console.log(forecastData);
-<span class="cstat-no" title="statement not covered" >                setWeatherData(<span class="fstat-no" title="function not covered" >(p</span>revData) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                    if (!prevData) {</span>
-<span class="cstat-no" title="statement not covered" >                        return null;</span>
-                    }
-<span class="cstat-no" title="statement not covered" >                    return {</span>
-                        ...prevData,
-                        forecast: forecastData.forecast,
-                    };
-                });
-            } else {
-<span class="cstat-no" title="statement not covered" >                console.error(</span>
-                    'Failed to fetch forecasted weather data:',
-                    forecastResponse.statusText
-                );
-            }
-        } catch (error) {
-<span class="cstat-no" title="statement not covered" >            console.error('Error fetching weather data:', error);</span>
-        }
-    };
+      const forecastResponse = <span class="cstat-no" title="statement not covered" >await fetch(</span>
+        `http://localhost:5000/api/forecast?city=${city}&amp;_=${timestamp}`
+      );
+<span class="cstat-no" title="statement not covered" >      if (forecastResponse.ok) {</span>
+        const forecastData = <span class="cstat-no" title="statement not covered" >await forecastResponse.json();</span>
+        // console.log(forecastData);
+<span class="cstat-no" title="statement not covered" >        setWeatherData(<span class="fstat-no" title="function not covered" >(p</span>revData) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          if (!prevData) {</span>
+<span class="cstat-no" title="statement not covered" >            return null;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          return {</span>
+            ...prevData,
+            forecast: forecastData.forecast,
+          };
+        });
+      } else {
+<span class="cstat-no" title="statement not covered" >        console.error(</span>
+          "Failed to fetch forecasted weather data:",
+          forecastResponse.statusText
+        );
+      }
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >      console.error("Error fetching weather data:", error);</span>
+    }
+  };
 &nbsp;
-    const handleSearch = <span class="fstat-no" title="function not covered" >(c</span>ity: string) =&gt; {
-<span class="cstat-no" title="statement not covered" >        fetchWeather(city);</span>
-    };
+  const handleSearch = <span class="fstat-no" title="function not covered" >(c</span>ity: string) =&gt; {
+<span class="cstat-no" title="statement not covered" >    fetchWeather(city);</span>
+  };
 &nbsp;
-    const [tempUnit, setTempUnit] = useState('C');
-    const [speedUnit, setSpeedUnit] = useState('mp/h');
-    const [measurementUnit, setMeasurementUnit] = useState('mm');
+  const [tempUnit, setTempUnit] = useState("C");
+  const [speedUnit, setSpeedUnit] = useState("mp/h");
+  const [measurementUnit, setMeasurementUnit] = useState("mm");
 &nbsp;
-    const handleTempUnitChange = <span class="fstat-no" title="function not covered" >(n</span>ewUnit: string) =&gt; {
-<span class="cstat-no" title="statement not covered" >        setTempUnit(newUnit);</span>
-    };
+  const handleTempUnitChange = <span class="fstat-no" title="function not covered" >(n</span>ewUnit: string) =&gt; {
+<span class="cstat-no" title="statement not covered" >    setTempUnit(newUnit);</span>
+  };
 &nbsp;
-    const handleSpeedUnitChange = <span class="fstat-no" title="function not covered" >(n</span>ewUnit: string) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log('change...');</span>
-<span class="cstat-no" title="statement not covered" >        setSpeedUnit(newUnit);</span>
-    };
+  const handleSpeedUnitChange = <span class="fstat-no" title="function not covered" >(n</span>ewUnit: string) =&gt; {
+<span class="cstat-no" title="statement not covered" >    console.log("change...");</span>
+<span class="cstat-no" title="statement not covered" >    setSpeedUnit(newUnit);</span>
+  };
 &nbsp;
-    const handleMeasurementUnitChange = <span class="fstat-no" title="function not covered" >(n</span>ewUnit: string) =&gt; {
-<span class="cstat-no" title="statement not covered" >        setMeasurementUnit(newUnit);</span>
-    };
+  const handleMeasurementUnitChange = <span class="fstat-no" title="function not covered" >(n</span>ewUnit: string) =&gt; {
+<span class="cstat-no" title="statement not covered" >    setMeasurementUnit(newUnit);</span>
+  };
 &nbsp;
-    return (
-        &lt;&gt;
-            &lt;div className='flex gap-4' data-testid='app-test'&gt;
-                &lt;main className='flex flex-col lg:gap-4 grow '&gt;
-                    &lt;div className='flex justify-between flex-col lg:flex-row bg-neutral-lightGrey dark:bg-neutral-darkGrey pt-8 pb-8 sticky top-0 z-50'&gt;
-                        &lt;header className='flex gap-4 justify-between'&gt;
-                            &lt;div className='flex gap-4'&gt;
-                                &lt;img
-                                    src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
-                                    className='rounded-full w-12 h-fit'
-                                /&gt;
-                                &lt;div className='flex flex-col justify-center'&gt;
-                                    &lt;small&gt;Hi Nick&lt;/small&gt;
-                                    &lt;h4&gt;{currentDate}&lt;/h4&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/header&gt;
-                        &lt;section className='flex flex-row flex-wrap lg:flex-row lg:flex-nowrap gap-4 lg:gap-8 lg:items-center justify-between lg:justify-end pt-4 lg:py-4'&gt;
-                            &lt;SearchLocation onSearch={handleSearch} /&gt;
-                            &lt;UnitSwitcher
-                                unit={tempUnit}
-                                onUnitChange={handleTempUnitChange}
-                                unitType='temperature'
-                            /&gt;
-                            &lt;UnitSwitcher
-                                unit={speedUnit}
-                                onUnitChange={handleSpeedUnitChange}
-                                unitType='speed'
-                            /&gt;
-                            &lt;UnitSwitcher
-                                unit={measurementUnit}
-                                onUnitChange={handleMeasurementUnitChange}
-                                unitType='measurements'
-                            /&gt;
-                            &lt;div className='absolute top-8 right-0 lg:static'&gt;
-                                &lt;ModeSwitcher
-                                    colorTheme={colorTheme}
-                                    setTheme={setTheme}
-                                /&gt;
-                            &lt;/div&gt;
-                        &lt;/section&gt;
-                    &lt;/div&gt;
-                    &lt;DashboardPanels
-                        searchedLocation={weatherData || null}
-                        fetchWeather={fetchWeather}
-                        colorTheme={colorTheme}
-                        tempUnit={tempUnit}
-                        speedUnit={speedUnit}
-                        measurementUnit={measurementUnit}
-                    /&gt;
-                &lt;/main&gt;
-                {/* &lt;aside className='flex flex-col gap-4'&gt;
+  return (
+    &lt;&gt;
+      &lt;div className="flex gap-4" data-testid="app-test"&gt;
+        &lt;main className="flex flex-col lg:gap-4 grow "&gt;
+          &lt;div className="flex justify-between flex-col lg:flex-row bg-neutral-lightGrey dark:bg-neutral-darkGrey pt-8 pb-8 sticky top-0 z-50"&gt;
+            &lt;header className="flex gap-4 justify-between"&gt;
+              &lt;div className="flex gap-4"&gt;
+                &lt;img
+                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  className="rounded-full w-12 h-fit"
+                /&gt;
+                &lt;div className="flex flex-col justify-center"&gt;
+                  &lt;small&gt;Hi Nick&lt;/small&gt;
+                  &lt;h4&gt;{currentDate}&lt;/h4&gt;
+                  &lt;small&gt;TEST XYZ&lt;/small&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/header&gt;
+            &lt;section className="flex flex-row flex-wrap lg:flex-row lg:flex-nowrap gap-4 lg:gap-8 lg:items-center justify-between lg:justify-end pt-4 lg:py-4"&gt;
+              &lt;SearchLocation onSearch={handleSearch} /&gt;
+              &lt;UnitSwitcher
+                unit={tempUnit}
+                onUnitChange={handleTempUnitChange}
+                unitType="temperature"
+              /&gt;
+              &lt;UnitSwitcher
+                unit={speedUnit}
+                onUnitChange={handleSpeedUnitChange}
+                unitType="speed"
+              /&gt;
+              &lt;UnitSwitcher
+                unit={measurementUnit}
+                onUnitChange={handleMeasurementUnitChange}
+                unitType="measurements"
+              /&gt;
+              &lt;div className="absolute top-8 right-0 lg:static"&gt;
+                &lt;ModeSwitcher colorTheme={colorTheme} setTheme={setTheme} /&gt;
+              &lt;/div&gt;
+            &lt;/section&gt;
+          &lt;/div&gt;
+          &lt;DashboardPanels
+            searchedLocation={weatherData || null}
+            fetchWeather={fetchWeather}
+            colorTheme={colorTheme}
+            tempUnit={tempUnit}
+            speedUnit={speedUnit}
+            measurementUnit={measurementUnit}
+          /&gt;
+        &lt;/main&gt;
+        {/* &lt;aside className='flex flex-col gap-4'&gt;
                     &lt;section&gt;
                         &lt;AstroPanels searchedLocation={weatherData || null} /&gt;
                     &lt;/section&gt;
                 &lt;/aside&gt; */}
-            &lt;/div&gt;
-        &lt;/&gt;
-    );
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
 }
 &nbsp;
 export default App;
@@ -505,7 +499,7 @@ export default App;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-27T23:20:24.715Z
+                at 2024-03-28T15:16:01.100Z
             </div>
         <script src="../prettify.js"></script>
         <script>
