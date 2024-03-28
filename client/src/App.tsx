@@ -95,7 +95,7 @@ function App() {
                 <div className="flex flex-col justify-center">
                   <small>Hi Nick</small>
                   <h4>{currentDate}</h4>
-                  <small>TEST</small>
+                  <small>TEST XYZ</small>
                 </div>
               </div>
             </header>
