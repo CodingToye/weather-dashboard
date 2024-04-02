@@ -22,7 +22,7 @@ function App() {
     try {
       const timestamp = Date.now();
       const currentResponse = await fetch(
-        `http://localhost:5000/api/current?city=${city}&_=${timestamp}`
+        `${process.env.REACT_APP_API_URL}/current?city=${city}&_=${timestamp}`
       );
       if (currentResponse.ok) {
         const currentData = await currentResponse.json();
@@ -35,7 +35,7 @@ function App() {
       }
 
       const forecastResponse = await fetch(
-        `http://localhost:5000/api/forecast?city=${city}&_=${timestamp}`
+        `${process.env.REACT_APP_API_URL}/forecast?city=${city}&_=${timestamp}`
       );
       if (forecastResponse.ok) {
         const forecastData = await forecastResponse.json();
@@ -83,19 +83,25 @@ function App() {
 
   return (
     <>
-      <div className="flex gap-4" data-testid="app-test">
+      <div className="flex flex-col gap-4" data-testid="app-test">
+        <div
+          className={` ${
+            process.env.NODE_ENV === "development" ? "bg-primary" : "bg-success"
+          } fixed top-0 right-8 z-50 p-2 text-xs rounded-b-lg`}
+        >
+          {process.env.NODE_ENV}
+        </div>
         <main className="flex flex-col lg:gap-4 grow ">
-          <div className="flex justify-between flex-col lg:flex-row bg-neutral-lightGrey dark:bg-neutral-darkGrey pt-8 pb-8 sticky top-0 z-50">
+          <div className="flex justify-between flex-col lg:flex-row bg-neutral-lightGrey dark:bg-neutral-darkGrey pt-8 pb-8 sticky top-0 z-40">
             <header className="flex gap-4 justify-between">
               <div className="flex gap-4">
                 <img
                   src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  className="rounded-full w-12 h-fit"
+                  className="rounded-full w-12"
                 />
                 <div className="flex flex-col justify-center">
                   <small>Hi Nick</small>
                   <h4>{currentDate}</h4>
-                  <small>TEST XYZ</small>
                 </div>
               </div>
             </header>

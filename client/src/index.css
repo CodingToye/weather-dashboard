@@ -1,74 +1,74 @@
-@import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0';
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0";
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply dark:bg-neutral-darkGrey;
-        @apply bg-neutral-lightGrey;
-        @apply dark:text-white;
-        @apply text-neutral-darkGrey;
-        @apply p-8;
-        @apply pt-0;
-        font-family: 'Roboto';
-    }
+  body {
+    @apply dark:bg-neutral-darkGrey;
+    @apply bg-neutral-lightGrey;
+    @apply dark:text-white;
+    @apply text-neutral-darkGrey;
+    @apply p-8;
+    @apply pt-0;
+    font-family: Roboto, sans-serif;
+  }
 
-    h1,
-    h2,
-    h3 {
-        /* font-family: 'Oswald'; */
-    }
+  h1,
+  h2,
+  h3 {
+    /* font-family: 'Oswald'; */
+  }
 
-    h2 {
-        @apply text-3xl;
-        > small {
-            @apply text-sm;
-        }
+  h2 {
+    @apply text-3xl;
+    > small {
+      @apply text-sm;
     }
+  }
 
-    h3 {
-        @apply text-2xl;
-    }
+  h3 {
+    @apply text-2xl;
+  }
 
-    h4 {
-        @apply text-xl;
-    }
+  h4 {
+    @apply text-xl;
+  }
 
-    small {
-        @apply text-xs;
-    }
+  small {
+    @apply text-xs;
+  }
 
-    img {
-        width: auto;
-        height: auto;
-    }
+  img {
+    width: auto;
+    height: auto;
+  }
 
-    .c-panel {
-        @apply dark:bg-neutral-midGrey;
-        @apply bg-white;
-        @apply dark:text-white;
-        @apply text-neutral-midGrey;
-        @apply rounded-lg;
-        /* @apply shadow-lg; */
-        @apply p-4;
-    }
+  .c-panel {
+    @apply dark:bg-neutral-midGrey;
+    @apply bg-white;
+    @apply dark:text-white;
+    @apply text-neutral-midGrey;
+    @apply rounded-lg;
+    /* @apply shadow-lg; */
+    @apply p-4;
+  }
 }
 
 @layer utilities {
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-    .fizz {
-        outline: 1px solid red;
-    }
+  .fizz {
+    outline: 1px solid red;
+  }
 
-    .debug > * {
-        outline: 1px solid red;
-    }
+  .debug > * {
+    outline: 1px solid red;
+  }
 }
 
 /* @media (min-width: 1024px) {

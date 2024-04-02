@@ -1,3 +1,4 @@
+const functions = require("firebase-functions");
 const fetch = require("node-fetch");
 /**
  * Fetches weather data for a given city and mode.
@@ -6,8 +7,10 @@ const fetch = require("node-fetch");
  * @return {Promise<Object>} - A promise that resolves to the weather data.
  */
 async function fetchWeatherData(city, mode) {
-  const apiKey = process.env.WEATHER_API_KEY;
-  const apiUrl = `https://api.weatherapi.com/v1/${mode}.json?key=${apiKey}&q=${city}&days=7`;
+  console.log("Fetching weather data for city:", city);
+
+  const apiKey = functions.config().weather.apikey;
+  const apiUrl = `http://api.weatherapi.com/v1/${mode}.json?key=${apiKey}&q=${city}&days=5`;
 
   try {
     const response = await fetch(apiUrl);
