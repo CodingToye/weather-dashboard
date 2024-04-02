@@ -1,8 +1,4 @@
-import {
-  ForecastHour,
-  TemperaturePanelProps,
-  CustomTooltipProps,
-} from "../../types/types";
+import {TemperaturePanelProps, CustomTooltipProps} from "../../types/types";
 import {
   getHourLabel,
   getHour,
