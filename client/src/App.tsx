@@ -100,7 +100,7 @@ function App() {
                   className="rounded-full w-12"
                 />
                 <div className="flex flex-col justify-center">
-                  <small>Hi Nick</small>
+                  <small>Hi Nick!</small>
                   <h4>{currentDate}</h4>
                 </div>
               </div>
