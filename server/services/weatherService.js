@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
 async function fetchWeatherData(city, mode) {
   const apiKey = process.env.WEATHER_API_KEY;
@@ -14,4 +14,4 @@ async function fetchWeatherData(city, mode) {
   }
 }
 
-module.exports = fetchWeatherData;
+export default fetchWeatherData;

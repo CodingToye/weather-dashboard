@@ -1,5 +1,7 @@
 {
-    "workbench.colorTheme": "Red",
-    "prettier.jsxSingleQuote": false,
-    "prettier.singleQuote": false
+  "workbench.colorTheme": "Red",
+  "prettier.jsxSingleQuote": false,
+  "prettier.singleQuote": false,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "all"
 }
