@@ -1,0 +1,15 @@
+{
+  "entryPoints": ["src/**/*.{tsx,ts}"],
+  "out": "docs",
+  "exclude": [
+    "**/*.test.tsx",
+    "**/node_modules/**",
+    "**/unused/**",
+    "**/react-app-env.d.ts",
+    "**/reportWebVitals.ts",
+    "**/setupTests.ts",
+    "**/index.tsx"
+  ],
+  "name": "Weather Dashboard components",
+  "includeVersion": true
+}

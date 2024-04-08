@@ -1,11 +1,25 @@
+// src/types/types.ts
+
+/**
+ * Represents a function that takes in a string to search upon.
+ */
+export interface SearchLocationProps {
+  onSearch: (city: string) => void;
+}
+
+/**
+ * Represents current weather data and location information.
+ * forecast via forecastday holds an array of information concerned with a particular day.
+ * alerts via alert holds an array of weather alert information
+ */
 export interface CurrentWeather {
   location: {
     name: string;
     country: string;
     region: string;
     localtime: string;
-    lat: number;
-    lon: number;
+    lat?: number;
+    lon?: number;
   };
   current: {
     temp_c: number;
@@ -24,20 +38,41 @@ export interface CurrentWeather {
   forecast: {
     forecastday: ForecastDay[];
   };
+  alerts: {
+    alert: Alert[];
+  };
 }
 
+/**
+ * Represents a forecast day and holds an array of day objects via ForecastDay
+ */
 export interface Forecast {
   forecastday: ForecastDay[];
-  // forecasthour: ForecastHour[];
 }
 
+/**
+ * Represents general forecast props for specific components that require specific data
+ */
+export interface ForecastProps {
+  searchedLocation: CurrentWeather;
+  forecast: Forecast | undefined;
+  measurementUnit?: string;
+  colorTheme: string;
+}
+
+/**
+ * Represents data regarding a forecast day, as well as holding an array for data concerned with the hour
+ */
 export interface ForecastDay {
   date: string;
   day: Day;
   hour: ForecastHour[];
-  astro: Astro;
 }
 
+/**
+ * Represents all data that is concerned with hourly updates,
+ * as well as the Conditions data object
+ */
 export interface ForecastHour {
   time: string;
   temp_c: number;
@@ -47,6 +82,10 @@ export interface ForecastHour {
   condition: Conditions;
 }
 
+/**
+ * Represents all data that is concerned with daily updates,
+ * as well as the Conditions data object
+ */
 export interface Day {
   mintemp_c: number;
   maxtemp_c: number;
@@ -63,64 +102,32 @@ export interface Day {
   uv: number;
 }
 
+/**
+ * Represents data concerned with current conditions such as a weather icon and text
+ */
 export interface Conditions {
   text: string;
   icon: string;
 }
 
-export interface SearchLocationProps {
-  /** The location the user wishes to search. */
-  onSearch: (city: string) => void;
+/**
+ * A collection of weather alerts.
+ * This interface is designed to hold an array of `Alert` objects,
+ * each representing specific weather alert information.
+ */
+export interface Alerts {
+  alert: Alert[];
 }
 
-export interface DashboardPanelsProps {
-  searchedLocation: CurrentWeather | null;
-  forecast?: Forecast | undefined;
-  fetchWeather: (city: string) => Promise<void>;
-  colorTheme: string;
-  tempUnit: string;
-  speedUnit: string;
-  measurementUnit: string;
-}
-
-export interface HeroPanelprops {
-  searchedLocation: CurrentWeather | null;
-}
-
-export interface AstroPanelProps {
-  searchedLocation: CurrentWeather | null;
-}
-
-export interface Astro {
-  sunrise: string;
-  sunset: string;
-}
-
-export interface TemperaturePanelProps {
-  unit: string;
-  forecastHour: ForecastHour[];
-  colorTheme: string;
-}
-
-export interface TooltipPayload {
-  value?: string | number;
-}
-
-export interface CustomTooltipProps {
-  payload?: TooltipPayload[];
-  label?: string;
-  unit?: string;
-}
-
-export interface UVProps {
-  searchedLocation: CurrentWeather;
-  forecast: Forecast;
-  colorTheme: string;
-}
-
-export interface WindPanelProps {
-  forecastHour: ForecastHour[];
-  searchedLocation: CurrentWeather;
-  speedUnit: string;
-  colorTheme: string;
+/**
+ * Represents Weather Alert information
+ */
+export interface Alert {
+  headline: string;
+  event: string;
+  category: string;
+  desc?: string;
+  effective: string;
+  expires: string;
+  certainty?: string;
 }

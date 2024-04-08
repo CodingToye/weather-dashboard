@@ -17,6 +17,8 @@
     "react-gauge-chart": "^0.4.1",
     "react-hook-form": "^7.51.1",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
+    "react-spring": "^9.7.3",
     "react-toggle-dark-mode": "^1.1.1",
     "recharts": "^2.12.3",
     "typescript": "^4.9.5",
@@ -28,7 +30,7 @@
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage",
     "lint": "eslint .",
-    "generate-docs": "npx typedoc --out docs/ src/**/*.tsx"
+    "generate-docs": "npx typedoc"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
@@ -58,6 +60,7 @@
     "eslint-plugin-import": "^2.29.1",
     "postcss": "^8.4.38",
     "postcss-import": "^16.1.0",
+    "resize-observer-polyfill": "^1.5.1",
     "tailwindcss": "^3.4.1",
     "typedoc": "^0.25.12"
   }
