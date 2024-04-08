@@ -1,7 +1,23 @@
-import Panel from "../../containers/Panel";
+// src/features/DashboardPanels/UVPanel.tsx
 
-import {UVProps, CustomTooltipProps} from "../../types/types";
-import Badge from "../../components/Badge";
+/**
+ * UVPanel Component
+ * Display UV data in the form of a chart
+ *
+ * @component
+ * @example
+ * return (
+ *  <UVPanel
+      forecast={forecast}
+      searchedLocation={searchedLocation}
+    />
+ * )
+ */
+
+import Panel from "../../components/Panel";
+import CustomTooltip from "../../components/CustomTooltip";
+import {Forecast} from "../../types/types";
+import {UVIndexBadges} from "../../components/UVIndexBadges";
 import Icon from "../../components/Icon";
 import {getDay} from "../../utils/dates.utils";
 import {
@@ -13,25 +29,26 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import {useTheme} from "../../context/themeContext";
 
-const getUVRating = (uvIndex: number, min: number, max: number): boolean => {
-  return uvIndex >= min && uvIndex <= max;
-};
+/** Properties for the UVPanel component
+ *
+ * Defines the props accepted by the UVPanel component to return useful data.
+ *
+ * @interface
+ */
 
-const CustomTooltip: React.FC<CustomTooltipProps> = ({payload, label}) => {
-  return (
-    <div className="bg-primary text-white px-4 py-1 rounded shadow-lg">
-      <p className="text-xs">{`${label}: ${payload?.[0]?.value}`}</p>
-    </div>
-  );
-};
+export interface UVPanelProps {
+  /** searchedLocation data object */
+  current: {
+    uv: number;
+  };
+  /** returns forecast object to access data */
+  forecast: Forecast;
+}
 
-const UVPanel: React.FC<UVProps> = ({
-  forecast,
-  searchedLocation,
-  colorTheme,
-}) => {
-  const {current} = searchedLocation || {};
+const UVPanel: React.FC<UVPanelProps> = ({current, forecast}) => {
+  const {theme} = useTheme();
   const uvIndex = current?.uv ?? 0;
   const uvWeeklyForecast = forecast.forecastday.slice(1);
 
@@ -42,7 +59,7 @@ const UVPanel: React.FC<UVProps> = ({
     };
   });
 
-  const dotColors = colorTheme === "light" ? "#fff" : "#000";
+  const dotColors = theme === "light" ? "#fff" : "#000";
 
   return (
     <Panel extraClasses="!items-start">
@@ -52,45 +69,15 @@ const UVPanel: React.FC<UVProps> = ({
         </header>
         <div className="flex items-center gap-4 text-neutral-darkGrey/50 dark:text-white/50">
           <div className="flex items-center">
-            <Icon iconName="sunny" extraClasses="mr-2 text-base" />
+            <Icon
+              iconName="sunny"
+              extraClasses="mr-2 text-base"
+              ariaLabel="Sun icon"
+            />
             <span className="text-xs">{uvIndex}</span>
           </div>
           <div className="flex gap-1">
-            <Badge
-              bgColor="uv-low"
-              textColor="uv-lowDark"
-              active={getUVRating(uvIndex, 0, 2)}
-            >
-              low
-            </Badge>
-            <Badge
-              bgColor="uv-moderate"
-              textColor="uv-moderateDark"
-              active={getUVRating(uvIndex, 3, 5)}
-            >
-              moderate
-            </Badge>
-            <Badge
-              bgColor="uv-high"
-              textColor="uv-highDark"
-              active={getUVRating(uvIndex, 6, 7)}
-            >
-              high
-            </Badge>
-            <Badge
-              bgColor="uv-veryHigh"
-              textColor="uv-veryHighDark"
-              active={getUVRating(uvIndex, 8, 10)}
-            >
-              very high
-            </Badge>
-            <Badge
-              bgColor="uv-extreme"
-              textColor="uv-extremeDark"
-              active={getUVRating(uvIndex, 11, 99)}
-            >
-              extreme
-            </Badge>
+            <UVIndexBadges uvIndex={uvIndex} />
           </div>
         </div>
       </div>
@@ -109,7 +96,7 @@ const UVPanel: React.FC<UVProps> = ({
             className="u-recharts-fix-overflow u-recharts-fix-overflow-tick"
           >
             <defs>
-              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="uvGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#f2651d" stopOpacity={0.8} />
                 <stop offset="95%" stopColor="#f2651d" stopOpacity={0} />
               </linearGradient>
@@ -134,11 +121,11 @@ const UVPanel: React.FC<UVProps> = ({
                 offset: -10,
               }}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip category="UV Index" />} />
             <Area
               type="natural"
               dataKey="uv"
-              fill="url(#colorUv)"
+              fill="url(#uvGradient)"
               stroke="none"
               dot={{fill: dotColors}}
             />

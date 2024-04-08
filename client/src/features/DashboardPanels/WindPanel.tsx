@@ -1,11 +1,26 @@
-import Panel from "../../containers/Panel";
+// src/features/DashboardPanels/WindPanel.tsx
+
+/**
+ * WindPanel Component
+ * Display Wind data in the form of a chart
+ *
+ * @component
+ * @example
+ * return (
+ *  <WindPanel
+      searchedLocation={searchedLocation}
+      forecastHour={forecastHour}
+      speedUnit={speedUnit}
+    />
+ * )
+ */
+
+import Panel from "../../components/Panel";
 import Icon from "../../components/Icon";
-import {WindPanelProps, CustomTooltipProps} from "../../types/types";
-import {
-  getHour,
-  getHourLabel,
-  getCurrentHourLabel,
-} from "../../utils/dates.utils";
+import CustomTooltip from "../../components/CustomTooltip";
+import {ForecastHour, CurrentWeather} from "../../types/types";
+import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
+import {useTheme} from "../../context/themeContext";
 
 import {
   ComposedChart,
@@ -18,42 +33,44 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const CustomTooltip: React.FC<CustomTooltipProps> = ({
-  payload,
-  label,
-  unit,
-}) => {
-  return (
-    <div className="bg-primary text-white px-4 py-1 rounded shadow-lg">
-      <p className="text-xs">
-        {`${label}: ${payload?.[0]?.value}`}
-        {`${unit}`}
-      </p>
-    </div>
-  );
-};
+/** Properties for the WindPanel component
+ *
+ * Defines the props accepted by the WindPanel component to return useful data.
+ *
+ * @interface
+ */
+
+export interface WindPanelProps {
+  /** returns forecastHour object to access wind_mph or wind_kph */
+  forecastHour: ForecastHour[];
+  /** searchedLocation data object */
+  searchedLocation: CurrentWeather;
+  /** current active speed unit */
+  speedUnit: string;
+}
 
 const WindPanel: React.FC<WindPanelProps> = ({
   forecastHour,
   searchedLocation,
   speedUnit,
-  colorTheme,
+  // colorTheme,
 }) => {
-  const {location, current} = searchedLocation || {};
+  const {theme} = useTheme();
+  const {current} = searchedLocation || {};
 
-  const localTime = location?.localtime;
-  const currentHour = getHour(localTime, false);
+  // const localTime = location?.localtime;
+  const currentHour = new Date().getHours(); // Get the current hour
   const currentHourLabel = getCurrentHourLabel(currentHour);
 
   const data = forecastHour.map((hour) => {
     const hourLabel = getHourLabel(hour.time);
     return {
       name: hourLabel,
-      wind: speedUnit === "m/ph" ? hour.wind_mph : hour.wind_kph,
+      wind: speedUnit === "mph" ? hour.wind_mph : hour.wind_kph,
     };
   });
 
-  const dotColors = colorTheme === "light" ? "#fff" : "#000";
+  const dotColors = theme === "light" ? "#fff" : "#000";
 
   return (
     <Panel extraClasses="!items-start">
@@ -62,10 +79,14 @@ const WindPanel: React.FC<WindPanelProps> = ({
           <h1 className="text-sm">Wind</h1>
         </header>
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
-          <Icon iconName="air" extraClasses="mr-2 text-base" />
+          <Icon
+            iconName="air"
+            extraClasses="mr-2 text-base"
+            ariaLabel="Wind icon"
+          />
           <span className="text-xs">
             Current wind speed:{" "}
-            {speedUnit === "mp/h" ? current.wind_mph : current.wind_kph}
+            {speedUnit === "mph" ? current.wind_mph : current.wind_kph}
             {speedUnit}
           </span>
         </div>
@@ -115,7 +136,9 @@ const WindPanel: React.FC<WindPanelProps> = ({
               stroke="rgba(255,255,255,.5)"
               strokeDasharray="3 3"
             />
-            <Tooltip content={<CustomTooltip unit={speedUnit} />} />
+            <Tooltip
+              content={<CustomTooltip category="Wind" unit={speedUnit} />}
+            />
             <Area
               type="natural"
               dataKey="wind"

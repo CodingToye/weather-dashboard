@@ -1,59 +1,61 @@
-import Panel from '../../containers/Panel';
-import PieChance from '../../components/PieChance';
-import Icon from '../../components/Icon';
+// src/features/DashboardPanels/HumidityPanel.tsx
 
-interface HumidityPanelProps {
-    humidity: number;
-    colorTheme: string;
+/**
+ * Humidity Component
+ * Display Humidity levels in the form of a chart
+ *
+ * @component
+ * @example
+ * return (
+ *  {humidity && (
+      <HumidityPanel humidity={humidity} />
+    )}
+ * )
+ */
+
+import Panel from "../../components/Panel";
+import PieChance from "../../components/PieChance";
+import Icon from "../../components/Icon";
+import {humidityLevels} from "../../utils/weather.utils";
+
+/** Properties for the HumidityPanel component
+ *
+ * Defines the props accepted by the HumidityPanel component to return useful data.
+ *
+ * @interface
+ */
+export interface HumidityPanelProps {
+  // Humidity levels as a number
+  humidity: number;
 }
 
-const HumidityPanel: React.FC<HumidityPanelProps> = ({
-    humidity,
-    colorTheme,
-}) => {
-    const data = [
-        { name: 'Humidity', value: humidity },
-        { name: 'Remaining', value: 100 - humidity },
-    ];
+const HumidityPanel: React.FC<HumidityPanelProps> = ({humidity}) => {
+  const data = [
+    {name: "Humidity", value: humidity},
+    {name: "Remaining", value: 100 - humidity},
+  ];
 
-    const humidityLevels = (x: number) => {
-        if (x <= 55) {
-            return {
-                icon: 'humidity_low',
-                text: 'low',
-            };
-        } else if (x > 55 && x <= 65) {
-            return {
-                icon: 'humidity_mid',
-                text: 'mid',
-            };
-        } else {
-            return {
-                icon: 'humidity_high',
-                text: 'high',
-            };
-        }
-    };
+  const currentHumidityLevels = humidityLevels(humidity);
 
-    return (
-        <Panel itemsCentered>
-            <div className='flex flex-col items-center'>
-                <header className='mb-2'>
-                    <h1 className='text-sm'>Humidity</h1>
-                </header>
-                <div className='flex items-center text-neutral-darkGrey/50 dark:text-white/50'>
-                    <Icon
-                        iconName={humidityLevels(humidity).icon}
-                        extraClasses='mr-2 text-base'
-                    />
-                    <span className='text-xs'>
-                        {humidityLevels(humidity).text}
-                    </span>
-                </div>
-            </div>
-            <PieChance data={data} colorTheme={colorTheme} />
-        </Panel>
-    );
+  return (
+    <Panel itemsCentered dataTestId="humidity-panel-test">
+      <div className="flex flex-col items-center">
+        <header className="mb-2">
+          <h1 className="text-sm">Humidity</h1>
+        </header>
+        <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
+          <Icon
+            iconName={currentHumidityLevels.icon}
+            extraClasses="mr-2 text-base"
+            ariaLabel={` ${currentHumidityLevels.text} icon`}
+          />
+          <span className="text-xs">{currentHumidityLevels.text}</span>
+        </div>
+      </div>
+
+      <PieChance data={data} />
+    </Panel>
+  );
 };
 
 export default HumidityPanel;

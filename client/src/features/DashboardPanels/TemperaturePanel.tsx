@@ -1,9 +1,23 @@
-import {TemperaturePanelProps, CustomTooltipProps} from "../../types/types";
-import {
-  getHourLabel,
-  getHour,
-  getCurrentHourLabel,
-} from "../../utils/dates.utils";
+// src/features/DashboardPanels/TemperaturePanel.tsx
+
+/**
+ * Temperature Component
+ * Display Temperature data in the form of a chart
+ *
+ * @component
+ * @example
+ * return (
+ *  <TemperaturePanel
+      unit={tempUnit}
+      forecastHour={forecastHour}
+    />
+ * )
+ */
+
+import {ForecastHour} from "../../types/types";
+import CustomTooltip from "../../components/CustomTooltip";
+import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
+import {useTheme} from "../../context/themeContext";
 
 import {
   ComposedChart,
@@ -16,31 +30,28 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const CustomTooltip: React.FC<CustomTooltipProps> = ({
-  payload,
-  label,
-  unit,
-}) => {
-  return (
-    <div className="bg-primary text-white px-4 py-1 rounded shadow-lg">
-      <p className="text-xs">
-        {`${label}: ${payload?.[0]?.value}`}
-        <sup>&deg;</sup>
-        {`${unit}`}
-      </p>
-    </div>
-  );
-};
+/** Properties for the TemperaturePanel component
+ *
+ * Defines the props accepted by the TemperaturePanel component to return useful data.
+ *
+ * @interface
+ */
+
+export interface TemperaturePanelProps {
+  /** current active unit */
+  unit: string;
+  /** ForecastHour object */
+  forecastHour: ForecastHour[];
+}
 
 const TemperaturePanel: React.FC<TemperaturePanelProps> = ({
   unit,
   forecastHour,
-  colorTheme,
 }) => {
-  const currentHour = new Date().toString(); // Get the current hour
-  const formattedCurrentHour = getHour(currentHour, false);
+  const {theme} = useTheme();
+  const currentHour = new Date().getHours(); // Get the current hour
 
-  const currentHourLabel = getCurrentHourLabel(formattedCurrentHour);
+  const currentHourLabel = getCurrentHourLabel(currentHour);
 
   const data = forecastHour.map((hour) => {
     if (hour && hour.time) {
@@ -54,7 +65,7 @@ const TemperaturePanel: React.FC<TemperaturePanelProps> = ({
     }
   });
 
-  const dotColors = colorTheme === "light" ? "#fff" : "#000";
+  const dotColors = theme === "light" ? "#fff" : "#000";
 
   return (
     <section className="text-center">
@@ -76,7 +87,7 @@ const TemperaturePanel: React.FC<TemperaturePanelProps> = ({
             className="u-recharts-fix-overflow u-recharts-fix-overflow-ticks"
           >
             <defs>
-              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#f2651d" stopOpacity={0.8} />
                 <stop offset="95%" stopColor="#f2651d" stopOpacity={0} />
               </linearGradient>
@@ -108,7 +119,7 @@ const TemperaturePanel: React.FC<TemperaturePanelProps> = ({
             <Area
               type="natural"
               dataKey="temp"
-              fill="url(#colorUv)"
+              fill="url(#tempGradient)"
               stroke="none"
               dot={{fill: dotColors}}
             />
