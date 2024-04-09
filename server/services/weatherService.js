@@ -1,8 +1,12 @@
 import fetch from "node-fetch";
 
-async function fetchWeatherData(city, mode) {
+async function fetchWeatherData(city, mode, includeAlerts = false) {
   const apiKey = process.env.WEATHER_API_KEY;
-  const apiUrl = `https://api.weatherapi.com/v1/${mode}.json?key=${apiKey}&q=${city}&days=7`;
+  let apiUrl = `https://api.weatherapi.com/v1/${mode}.json?key=${apiKey}&q=${city}&days=5`;
+
+  if (includeAlerts) {
+    apiUrl += "&alerts=yes";
+  }
 
   try {
     const response = await fetch(apiUrl);
