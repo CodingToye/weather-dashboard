@@ -30,7 +30,7 @@ app.get("/forecast", async (req, res) => {
     return res.status(400).json({error: "City parameter is required"});
   }
   try {
-    const weatherData = await fetchWeatherData(city, "forecast");
+    const weatherData = await fetchWeatherData(city, "forecast", true);
     res.json(weatherData);
   } catch (error) {
     console.error("Error fetching forecast weather data:", error);
