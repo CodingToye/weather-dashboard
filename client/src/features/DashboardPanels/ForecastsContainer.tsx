@@ -17,11 +17,11 @@
     )}
  * )
  */
+import {Forecast, Alerts} from "../../types/types";
 
 import WeeklyForecastPanel from "./WeeklyForecastPanel";
 import HourlyForecastPanel from "./HourlyForecastPanel";
 import AlertsPanel from "./AlertsPanel";
-import {Forecast, CurrentWeather, Alerts} from "../../types/types";
 
 /** Properties for the ForecastsContainer component
  *

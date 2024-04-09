@@ -14,10 +14,12 @@
  */
 
 import {useState, useEffect} from "react";
+
 import Panel from "../../components/Panel";
 import {Alerts, Alert} from "../../types/types";
 import Icon from "../../components/Icon";
 import Button from "../../components/Button";
+
 import AlertPanel from "./AlertPanel";
 
 /**

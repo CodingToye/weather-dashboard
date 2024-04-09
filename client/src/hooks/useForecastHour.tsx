@@ -27,6 +27,7 @@
  */
 
 import {useMemo} from "react";
+
 import {Forecast, ForecastHour} from "../types/types";
 
 export const useForecastHour = (forecast?: Forecast): ForecastHour[] => {

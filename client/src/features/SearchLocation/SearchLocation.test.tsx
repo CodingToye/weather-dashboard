@@ -1,4 +1,5 @@
 import { render, screen, cleanup } from '@testing-library/react';
+
 import SearchLocation from './index';
 
 describe('SearchLocation', () => {

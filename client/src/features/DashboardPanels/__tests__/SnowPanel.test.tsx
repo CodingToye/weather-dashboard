@@ -4,9 +4,9 @@ jest.mock("../../../utils/units.utils", () => ({
 }));
 
 // Import after mocking
-import {cmToInches, cmToMm} from "../../../utils/units.utils";
-
 import {screen} from "@testing-library/react";
+
+import {cmToInches, cmToMm} from "../../../utils/units.utils";
 import {render} from "../../../utils/test.utils";
 import SnowPanel from "../SnowPanel";
 import {Forecast} from "../../../types/types";

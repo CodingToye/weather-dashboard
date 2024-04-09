@@ -12,6 +12,7 @@
  */
 
 import React from "react";
+
 import {getDay, getShortDate} from "../../utils/dates.utils";
 import Panel from "../../components/Panel";
 import {Forecast, ForecastDay} from "../../types/types";

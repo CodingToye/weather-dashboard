@@ -18,7 +18,8 @@
  */
 
 import React from "react";
-import {Forecast, ForecastHour, CurrentWeather} from "../../types/types";
+
+import {Forecast, ForecastHour, Location} from "../../types/types";
 import {getHour} from "../../utils/dates.utils";
 import Panel from "../../components/Panel";
 import Icon from "../../components/Icon";
@@ -35,7 +36,7 @@ export interface HourlyForecastPanelProps {
   /** current active unit */
   unit: string;
   /** current active location */
-  location: CurrentWeather["location"];
+  location: Location;
 }
 
 const HourlyForecastPanel: React.FC<HourlyForecastPanelProps> = ({

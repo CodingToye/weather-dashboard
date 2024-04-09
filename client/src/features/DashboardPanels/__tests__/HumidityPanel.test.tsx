@@ -1,5 +1,6 @@
 import React from "react";
 import {screen} from "@testing-library/react";
+
 import {render} from "../../../utils/test.utils";
 import HumidityPanel from "../HumidityPanel";
 

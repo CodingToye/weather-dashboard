@@ -14,11 +14,6 @@
  * )
  */
 
-import {ForecastHour} from "../../types/types";
-import CustomTooltip from "../../components/CustomTooltip";
-import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
-import {useTheme} from "../../context/themeContext";
-
 import {
   ComposedChart,
   Area,
@@ -29,6 +24,11 @@ import {
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
+
+import {ForecastHour} from "../../types/types";
+import CustomTooltip from "../../components/CustomTooltip";
+import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
+import {useTheme} from "../../context/themeContext";
 
 /** Properties for the TemperaturePanel component
  *
@@ -68,7 +68,7 @@ const TemperaturePanel: React.FC<TemperaturePanelProps> = ({
   const dotColors = theme === "light" ? "#fff" : "#000";
 
   return (
-    <section className="text-center">
+    <section className="text-center" data-testid="temperature-panel-test">
       <header className="mb-4">
         <h1>Temperature</h1>
       </header>

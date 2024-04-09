@@ -14,14 +14,6 @@
     />
  * )
  */
-
-import Panel from "../../components/Panel";
-import Icon from "../../components/Icon";
-import CustomTooltip from "../../components/CustomTooltip";
-import {ForecastHour, CurrentWeather} from "../../types/types";
-import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
-import {useTheme} from "../../context/themeContext";
-
 import {
   ComposedChart,
   Area,
@@ -33,6 +25,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import Panel from "../../components/Panel";
+import Icon from "../../components/Icon";
+import CustomTooltip from "../../components/CustomTooltip";
+import {Current, ForecastHour} from "../../types/types";
+import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
+import {useTheme} from "../../context/themeContext";
+
 /** Properties for the WindPanel component
  *
  * Defines the props accepted by the WindPanel component to return useful data.
@@ -41,24 +40,18 @@ import {
  */
 
 export interface WindPanelProps {
-  /** returns forecastHour object to access wind_mph or wind_kph */
   forecastHour: ForecastHour[];
-  /** searchedLocation data object */
-  searchedLocation: CurrentWeather;
-  /** current active speed unit */
+  current?: Current;
   speedUnit: string;
 }
 
 const WindPanel: React.FC<WindPanelProps> = ({
   forecastHour,
-  searchedLocation,
+  current,
   speedUnit,
-  // colorTheme,
 }) => {
   const {theme} = useTheme();
-  const {current} = searchedLocation || {};
 
-  // const localTime = location?.localtime;
   const currentHour = new Date().getHours(); // Get the current hour
   const currentHourLabel = getCurrentHourLabel(currentHour);
 
@@ -73,7 +66,7 @@ const WindPanel: React.FC<WindPanelProps> = ({
   const dotColors = theme === "light" ? "#fff" : "#000";
 
   return (
-    <Panel extraClasses="!items-start">
+    <Panel extraClasses="!items-start" dataTestId="wind-panel-test">
       <div>
         <header className="mb-2">
           <h1 className="text-sm">Wind</h1>
@@ -86,7 +79,7 @@ const WindPanel: React.FC<WindPanelProps> = ({
           />
           <span className="text-xs">
             Current wind speed:{" "}
-            {speedUnit === "mph" ? current.wind_mph : current.wind_kph}
+            {speedUnit === "mph" ? current?.wind_mph : current?.wind_kph}
             {speedUnit}
           </span>
         </div>

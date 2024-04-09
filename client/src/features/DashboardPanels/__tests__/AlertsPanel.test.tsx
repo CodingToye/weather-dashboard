@@ -1,4 +1,5 @@
 import {render, fireEvent, screen} from "@testing-library/react";
+
 import AlertsPanel from "../AlertsPanel";
 
 describe("AlertsPanel integration test", () => {

@@ -18,6 +18,7 @@
 
 import React, {useState, useRef, useEffect} from "react";
 import {useSpring, animated} from "react-spring";
+
 import Icon from "../../components/Icon";
 import Button from "../../components/Button";
 import {Alert} from "../../types/types";

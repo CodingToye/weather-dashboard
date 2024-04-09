@@ -18,7 +18,12 @@
  */
 
 import React from "react";
-import {Forecast, Alerts, CurrentWeather} from "../../types/types";
+
+import {Forecast, Alerts, SearchedLocation, Current} from "../../types/types";
+import {useForecastHour} from "../../hooks/useForecastHour";
+import Loader from "../../components/Loader";
+import {useUnits} from "../../context/unitsContext";
+
 import HeroPanel from "./HeroPanel";
 import ForecastsContainer from "./ForecastsContainer";
 import WindPanel from "./WindPanel";
@@ -27,32 +32,22 @@ import SnowPanel from "./SnowPanel";
 import UVPanel from "./UVPanel";
 import CloudPanel from "./CloudPanel";
 import HumidityPanel from "./HumidityPanel";
-import {useForecastHour} from "../../hooks/useForecastHour";
-import Loader from "../../components/Loader";
 
 export interface DashboardPanelsProps {
   /** searchedLocation data object */
-  searchedLocation: CurrentWeather | null;
+  searchedLocation: SearchedLocation | null;
   /** forecast data object */
   forecast?: Forecast | undefined;
+  /** current weather data object */
+  current?: Current | null;
   /** alerts data object */
   alerts?: Alerts | undefined;
-  /** TODO */
-  fetchWeather: (city: string) => Promise<void>;
-  /** current active temp unit */
-  tempUnit: string;
-  /** current active speed unit */
-  speedUnit: string;
-  /** current active measurement unit */
-  measurementUnit: string;
 }
 
 const DashboardPanelsContainer: React.FC<DashboardPanelsProps> = ({
   searchedLocation,
-  tempUnit,
-  speedUnit,
-  measurementUnit,
 }) => {
+  const {tempUnit, speedUnit, measurementUnit} = useUnits();
   const {current, forecast, alerts} = searchedLocation || {};
   const forecastHour = useForecastHour(forecast);
   const {humidity} = current || {};
@@ -76,9 +71,9 @@ const DashboardPanelsContainer: React.FC<DashboardPanelsProps> = ({
             />
           )}
           <div className="grid lg:grid-cols-4 gap-8">
-            {searchedLocation && forecast && (
+            {searchedLocation && forecast && current && (
               <>
-                <CloudPanel current={searchedLocation.current} />
+                <CloudPanel current={current} />
                 {humidity && <HumidityPanel humidity={humidity} />}
 
                 <RainPanel
@@ -93,17 +88,14 @@ const DashboardPanelsContainer: React.FC<DashboardPanelsProps> = ({
             )}
           </div>
           <div className="grid lg:grid-cols-2 gap-8">
-            {searchedLocation && (
+            {searchedLocation && current && (
               <>
                 <WindPanel
-                  searchedLocation={searchedLocation}
+                  current={current}
                   forecastHour={forecastHour}
                   speedUnit={speedUnit}
                 />
-                <UVPanel
-                  current={searchedLocation.current}
-                  forecast={forecast}
-                />
+                <UVPanel current={current} forecast={forecast} />
               </>
             )}
           </div>

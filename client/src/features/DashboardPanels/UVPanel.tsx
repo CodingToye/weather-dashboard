@@ -9,17 +9,11 @@
  * return (
  *  <UVPanel
       forecast={forecast}
-      searchedLocation={searchedLocation}
+      current={searchedLocation.current}
     />
  * )
  */
 
-import Panel from "../../components/Panel";
-import CustomTooltip from "../../components/CustomTooltip";
-import {Forecast} from "../../types/types";
-import {UVIndexBadges} from "../../components/UVIndexBadges";
-import Icon from "../../components/Icon";
-import {getDay} from "../../utils/dates.utils";
 import {
   ComposedChart,
   CartesianGrid,
@@ -29,6 +23,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+
+import Panel from "../../components/Panel";
+import CustomTooltip from "../../components/CustomTooltip";
+import {Forecast} from "../../types/types";
+import {UVIndexBadges} from "../../components/UVIndexBadges";
+import Icon from "../../components/Icon";
+import {getDay} from "../../utils/dates.utils";
 import {useTheme} from "../../context/themeContext";
 
 /** Properties for the UVPanel component
@@ -62,7 +63,7 @@ const UVPanel: React.FC<UVPanelProps> = ({current, forecast}) => {
   const dotColors = theme === "light" ? "#fff" : "#000";
 
   return (
-    <Panel extraClasses="!items-start">
+    <Panel extraClasses="!items-start" dataTestId="uv-panel-test">
       <div>
         <header className="mb-2">
           <h1 className="text-sm">UV index</h1>
