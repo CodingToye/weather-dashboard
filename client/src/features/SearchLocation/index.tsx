@@ -1,9 +1,10 @@
 // src/features/SearchLocation/index.tsx
 
 import React from "react";
+import {useForm, SubmitHandler} from "react-hook-form";
+
 import {SearchLocationProps} from "../../types/types";
 import Input from "../../components/Input";
-import {useForm, SubmitHandler} from "react-hook-form";
 
 /**
  * SearchLocation component.

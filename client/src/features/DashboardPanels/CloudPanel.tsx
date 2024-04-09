@@ -26,12 +26,9 @@ import {cloudLevels} from "../../utils/weather.utils";
  */
 
 export interface CloudPanelProps {
-  /** Contains only the location part of the CurrentWeather type */
   current: {
     cloud: number;
   };
-  /** The current color theme. Expected values are 'light' or 'dark', determined by an external theme management hook. */
-  // colorTheme: string;
 }
 
 const CloudPanel: React.FC<CloudPanelProps> = ({current}) => {

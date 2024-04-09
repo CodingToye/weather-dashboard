@@ -17,7 +17,8 @@
  * )
  */
 
-import {ForecastHour} from "../../types/types";
+import {SearchedLocation, ForecastHour} from "../../types/types";
+
 import TemperaturePanel from "./TemperaturePanel";
 
 /** Properties for the HeroPanel component
@@ -27,27 +28,8 @@ import TemperaturePanel from "./TemperaturePanel";
  * @interface
  */
 export interface HeroPanelProps {
-  /** searchedLocation data object */
-  searchedLocation: {
-    current: {
-      temp_c: number;
-      temp_f: number;
-      feelslike_c: number;
-      feelslike_f: number;
-      condition: {
-        icon: string;
-        text: string;
-      };
-    };
-    location: {
-      name: string;
-      region: string;
-      country: string;
-    };
-  };
-  /** forecast data object */
+  searchedLocation: SearchedLocation;
   forecastHour: ForecastHour[];
-  /** current active tempUnit */
   tempUnit: string;
 }
 

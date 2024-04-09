@@ -16,8 +16,8 @@
  * )
  */
 
-import React from "react";
 import {UseFormRegister, FieldValues, Path} from "react-hook-form";
+
 import Icon from "./Icon";
 
 /** Properties for the Input component
