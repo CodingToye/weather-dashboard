@@ -66,7 +66,7 @@ const UVPanel: React.FC<UVPanelProps> = ({current, forecast}) => {
     <Panel extraClasses="!items-start" dataTestId="uv-panel-test">
       <div>
         <header className="mb-2">
-          <h1 className="text-sm">UV index</h1>
+          <h1 className="text-sm text-primary">UV index</h1>
         </header>
         <div className="flex items-center gap-4 text-neutral-darkGrey/50 dark:text-white/50">
           <div className="flex items-center">

@@ -28,7 +28,13 @@ const SearchLocation: React.FC<SearchLocationProps> = ({onSearch}) => {
     }
   };
 
-  const {register, handleSubmit, reset} = useForm<IFormValues>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: {errors},
+    formState,
+  } = useForm<IFormValues>({
     mode: "onSubmit",
   });
   return (
@@ -38,6 +44,7 @@ const SearchLocation: React.FC<SearchLocationProps> = ({onSearch}) => {
           name="searchLocation"
           placeholder="Search location or postcode"
           register={register}
+          formState={formState}
           icon="search"
         />
       </form>

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@heroicons/react": "^2.1.1",
+    "@hookform/resolvers": "^3.3.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,6 +13,7 @@
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "@vis.gl/react-google-maps": "^0.8.0",
+    "firebase": "^10.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-gauge-chart": "^0.4.1",
@@ -22,7 +24,8 @@
     "react-toggle-dark-mode": "^1.1.1",
     "recharts": "^2.12.3",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

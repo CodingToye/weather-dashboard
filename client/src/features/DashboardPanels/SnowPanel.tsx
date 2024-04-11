@@ -41,7 +41,7 @@ const SnowPanel: React.FC<SnowPanelProps> = ({forecast, measurementUnit}) => {
     <Panel flexDirection="col" itemsCentered dataTestId="snow-panel-test">
       <div className="flex flex-col items-center">
         <header className="mb-2">
-          <h1 className="text-sm">Snow chance</h1>
+          <h1 className="text-sm text-primary">Snow chance</h1>
         </header>
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon

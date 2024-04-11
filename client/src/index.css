@@ -10,7 +10,7 @@
     @apply bg-neutral-lightGrey;
     @apply dark:text-white;
     @apply text-neutral-darkGrey;
-    @apply p-8;
+    /* @apply p-8; */
     @apply pt-0;
     font-family: Roboto, sans-serif;
   }
@@ -51,7 +51,7 @@
     @apply bg-white;
     @apply dark:text-white;
     @apply text-neutral-midGrey;
-    @apply rounded-lg;
+    @apply rounded-xl;
     /* @apply shadow-lg; */
     @apply p-4;
   }

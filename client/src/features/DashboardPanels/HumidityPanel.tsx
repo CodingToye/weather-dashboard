@@ -41,7 +41,7 @@ const HumidityPanel: React.FC<HumidityPanelProps> = ({humidity}) => {
     <Panel itemsCentered dataTestId="humidity-panel-test">
       <div className="flex flex-col items-center">
         <header className="mb-2">
-          <h1 className="text-sm">Humidity</h1>
+          <h1 className="text-sm text-primary">Humidity</h1>
         </header>
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon

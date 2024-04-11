@@ -38,6 +38,7 @@ export interface ButtonProps {
   isDisabled?: boolean;
   /** Additional CSS classes for custom styling. Can be used to apply utility classes or custom styles. */
   extraClasses?: string;
+  buttonType?: "submit" | "reset" | "button";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -46,13 +47,14 @@ const Button: React.FC<ButtonProps> = ({
   title = "default title",
   isDisabled = false,
   extraClasses = "",
+  buttonType = "button",
 }) => {
   return (
     <>
       <button
-        type="button"
+        type={buttonType}
         onClick={onClick}
-        className={`p-1 px-2 flex rounded bg-primary ${extraClasses}`}
+        className={`p-2 rounded text-sm bg-primary text-white ${extraClasses}`}
         title={title}
         disabled={isDisabled}
         name={title}

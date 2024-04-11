@@ -48,6 +48,7 @@ module.exports = {
       },
       transitionProperty: {
         height: "height",
+        width: "width",
       },
       screens: {
         sm: "640px",
