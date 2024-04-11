@@ -40,7 +40,7 @@ const RainPanel: React.FC<RainPanelProps> = ({forecast, measurementUnit}) => {
     <Panel itemsCentered dataTestId="rain-panel-test">
       <div className="flex flex-col items-center">
         <header className="mb-2">
-          <h1 className="text-sm">Rain chance</h1>
+          <h1 className="text-sm text-primary">Rain chance</h1>
         </header>
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon

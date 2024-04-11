@@ -44,7 +44,7 @@ const CloudPanel: React.FC<CloudPanelProps> = ({current}) => {
     <Panel itemsCentered={true} dataTestId="cloud-panel-test">
       <div className="flex flex-col items-center">
         <header className="mb-2">
-          <h1 className="text-sm">Cloud cover</h1>
+          <h1 className="text-sm text-primary">Cloud cover</h1>
         </header>
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon

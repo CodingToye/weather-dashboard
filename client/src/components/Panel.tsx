@@ -53,7 +53,7 @@ const Panel: React.FC<PanelProps> = ({
       data-testid={dataTestId}
       className={`c-panel flex flex-${flexDirection} ${
         itemsCentered && "items-center"
-      } justify-between gap-4 ${extraClasses}`}
+      } justify-between gap-4 shadow dark:shadow-xl border-t border-white/10 ${extraClasses}`}
     >
       {children}
     </section>

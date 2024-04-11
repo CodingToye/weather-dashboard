@@ -8,6 +8,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import {ThemeProvider} from "./context/themeContext";
 import {UnitsProvider} from "./context/unitsContext";
+import {AuthProvider} from "./context/authContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,7 +17,9 @@ root.render(
   <React.StrictMode>
     <UnitsProvider>
       <ThemeProvider>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </ThemeProvider>
     </UnitsProvider>
   </React.StrictMode>

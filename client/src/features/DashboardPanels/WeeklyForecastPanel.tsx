@@ -39,7 +39,7 @@ const WeeklyForecastPanel: React.FC<WeeklyForecastPanelProps> = ({
     <>
       <Panel dataTestId="weekly-forecast-panel-test">
         <header className="mb-0">
-          <h1 className="text-sm">Weekly Forecast</h1>
+          <h1 className="text-sm text-primary">Weekly Forecast</h1>
         </header>
         <div className="flex flex-col items-start gap-2">
           {weeklyForecast.map((day: ForecastDay, index: number) => (

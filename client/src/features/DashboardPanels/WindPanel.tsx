@@ -69,7 +69,7 @@ const WindPanel: React.FC<WindPanelProps> = ({
     <Panel extraClasses="!items-start" dataTestId="wind-panel-test">
       <div>
         <header className="mb-2">
-          <h1 className="text-sm">Wind</h1>
+          <h1 className="text-sm text-primary">Wind</h1>
         </header>
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon

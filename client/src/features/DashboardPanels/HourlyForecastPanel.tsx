@@ -73,7 +73,7 @@ const HourlyForecastPanel: React.FC<HourlyForecastPanelProps> = ({
         dataTestId="hourly-forecast-panel-test"
       >
         <header className="mb-0">
-          <h1 className="text-sm">Forecast</h1>
+          <h1 className="text-sm text-primary">Forecast</h1>
         </header>
 
         {reorderedHourlyForecast.length ? (
@@ -83,7 +83,7 @@ const HourlyForecastPanel: React.FC<HourlyForecastPanelProps> = ({
                 key={`${hour.time}-${j}`}
                 className={`flex flex-col justify-between gap-4 items-center shrink-0 w-24 text-white ${
                   j === 0
-                    ? "bg-gradient-to-b from-primary"
+                    ? " bg-primary"
                     : "bg-neutral-darkGrey dark:bg-neutral-darkGrey/30 border"
                 } rounded-lg p-4 border-white/20  border-dashed`}
               >

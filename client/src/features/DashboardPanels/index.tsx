@@ -59,7 +59,7 @@ const DashboardPanelsContainer: React.FC<DashboardPanelsProps> = ({
   return (
     <>
       <div
-        className="grid lg:grid-cols-2 gap-8 w-full"
+        className="grid lg:grid-cols-2 gap-8 w-full px-8 pb-8"
         data-testid="dashboard-panels-test"
       >
         <div className="flex flex-col grow gap-8 order-1">

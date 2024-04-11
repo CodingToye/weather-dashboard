@@ -69,7 +69,7 @@ const TemperaturePanel: React.FC<TemperaturePanelProps> = ({
 
   return (
     <section className="text-center" data-testid="temperature-panel-test">
-      <header className="mb-4">
+      <header className="mb-4 text-sm text-primary">
         <h1>Temperature</h1>
       </header>
       <div className="flex w-full h-64">
