@@ -12,6 +12,7 @@ import {FirebaseError} from "firebase/app";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import {useAuth} from "../../context/authContext";
 
 interface IFormValues {
   email: string;
@@ -32,7 +33,9 @@ const loginSchema = yup
   .required();
 
 const LoginUser = () => {
+  const {refreshUser} = useAuth();
   const [authError, setAuthError] = useState("");
+  const [emailVerificationNeeded, setEmailVerificationNeeded] = useState(false);
   const [showPasswordResetForm, setShowPasswordResetForm] =
     useState<boolean>(false);
   const [successfulPasswordReset, setSuccessfulPasswordReset] =
@@ -42,10 +45,37 @@ const LoginUser = () => {
     criteriaMode: "all",
     resolver: yupResolver(loginSchema),
   });
-  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
+
+  const refreshUserStatus = async () => {
     const auth = getAuth();
+    if (auth.currentUser) {
+      await auth.currentUser.reload();
+      if (auth.currentUser.emailVerified) {
+        console.log("Email is verified");
+        refreshUser();
+        setEmailVerificationNeeded(false);
+      } else {
+        setAuthError("Please verify your email address");
+        setEmailVerificationNeeded(true);
+      }
+    }
+  };
+  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      const userCredential = await signInWithEmailAndPassword(
+        getAuth(),
+        data.email,
+        data.password
+      );
+      console.log(userCredential.user.emailVerified);
+      if (!userCredential.user.emailVerified) {
+        setAuthError("Login failed. Email not verified.");
+        setEmailVerificationNeeded(true);
+      } else {
+        console.log("Login successful and verified");
+
+        setEmailVerificationNeeded(false);
+      }
     } catch (error) {
       if (error instanceof FirebaseError) {
         console.error(error.message);
@@ -54,6 +84,7 @@ const LoginUser = () => {
         console.error("An unexpected error occurred:", error);
         setAuthError("An unexpected error occurred. Please try again");
       }
+      setEmailVerificationNeeded(false);
     }
   };
 
@@ -82,50 +113,59 @@ const LoginUser = () => {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-auto min-w-72"
-      >
-        {successfulPasswordReset && (
-          <small className="text-success">
-            A password reset link has been emailed to you.
-          </small>
-        )}
-        <Input
-          name="email"
-          placeholder="Enter email"
-          register={register}
-          formState={formState}
-          icon="mail"
-          label="Email"
-        />
-        {!showPasswordResetForm && (
-          <>
-            <Input
-              name="password"
-              placeholder="Enter password"
-              register={register}
-              formState={formState}
-              icon="lock"
-              inputType="password"
-              label="Password"
-            />
-            <small className="cursor-pointer" onClick={onShowPasswordResetForm}>
-              Forgotten password?
+      {emailVerificationNeeded ? (
+        <Button onClick={refreshUserStatus}>Check Email Verification</Button>
+      ) : (
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 w-auto"
+        >
+          {successfulPasswordReset && (
+            <small className="text-success">
+              A password reset link has been emailed to you.
             </small>
-          </>
-        )}
-        {authError && <p className="text-failure text-sm mb-4">{authError}</p>}
-        {!showPasswordResetForm ? (
-          <Button buttonType="submit" extraClasses="">
-            Login
-          </Button>
-        ) : (
-          <Button extraClasses="" onClick={handleForgottenPassword}>
-            Reset
-          </Button>
-        )}
-      </form>
+          )}
+          <Input
+            name="email"
+            placeholder="Enter email"
+            register={register}
+            formState={formState}
+            icon="mail"
+            label="Email"
+          />
+          {!showPasswordResetForm && (
+            <>
+              <Input
+                name="password"
+                placeholder="Enter password"
+                register={register}
+                formState={formState}
+                icon="lock"
+                inputType="password"
+                label="Password"
+              />
+              <small
+                className="cursor-pointer"
+                onClick={onShowPasswordResetForm}
+              >
+                Forgotten password?
+              </small>
+            </>
+          )}
+          {authError && (
+            <p className="text-failure text-sm mb-4">{authError}</p>
+          )}
+          {!showPasswordResetForm ? (
+            <Button buttonType="submit" extraClasses="">
+              Login
+            </Button>
+          ) : (
+            <Button extraClasses="" onClick={handleForgottenPassword}>
+              Reset
+            </Button>
+          )}
+        </form>
+      )}
     </>
   );
 };

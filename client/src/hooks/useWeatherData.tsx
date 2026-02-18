@@ -39,7 +39,7 @@ const defaultWeatherData: SearchedLocation = {
 };
 
 function useWeatherData() {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<SearchedLocation | null>(null);
   const fetchWeatherData = useCallback(async (city: string) => {
     try {
       const fetchData = async (apiUrl: string) => {

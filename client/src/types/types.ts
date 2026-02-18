@@ -1,10 +1,13 @@
 // src/types/types.ts
 
+import {AirQuality} from "../features/DashboardPanels/AirQualityPanels/types";
+import {Forecast} from "../features/DashboardPanels/ForecastPanels/types";
+import {Alerts} from "../features/DashboardPanels/AlertsPanel/types";
 /**
  * Represents a function that takes in a string to search upon.
  */
 export interface SearchLocationProps {
-  onSearch: (city: string) => void;
+  onSearch: (city: string) => Promise<void>;
 }
 
 export interface Location {
@@ -14,6 +17,7 @@ export interface Location {
   localtime: string;
   lat?: number;
   lon?: number;
+  tz_id?: string;
 }
 
 export interface Current {
@@ -29,35 +33,16 @@ export interface Current {
   condition: Conditions;
   uv: number;
   cloud: number;
+  air_quality?: AirQuality;
 }
 
 /**
  * Represents a forecast day and holds an array of day objects via ForecastDay
  */
-export interface Forecast {
-  forecastday: ForecastDay[];
-}
 
-/**
- * A collection of weather alerts.
- * This interface is designed to hold an array of `Alert` objects,
- * each representing specific weather alert information.
- */
-export interface Alerts {
-  alert: Alert[];
-}
-
-/**
- * Represents Weather Alert information
- */
-export interface Alert {
-  headline: string;
-  event: string;
-  category: string;
-  desc?: string;
-  effective: string;
-  expires: string;
-  certainty?: string;
+export interface SearchError {
+  code: number;
+  message: string;
 }
 
 export interface SearchedLocation {
@@ -65,29 +50,17 @@ export interface SearchedLocation {
   location: Location;
   forecast: Forecast;
   alerts: Alerts;
+  error?: SearchError;
 }
 
 /**
  * Represents data regarding a forecast day, as well as holding an array for data concerned with the hour
  */
-export interface ForecastDay {
-  date: string;
-  day: Day;
-  hour: ForecastHour[];
-}
 
 /**
  * Represents all data that is concerned with hourly updates,
  * as well as the Conditions data object
  */
-export interface ForecastHour {
-  time: string;
-  temp_c: number;
-  temp_f: number;
-  wind_mph: number;
-  wind_kph: number;
-  condition: Conditions;
-}
 
 /**
  * Represents all data that is concerned with daily updates,

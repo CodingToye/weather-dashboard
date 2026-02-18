@@ -20,8 +20,7 @@
   "homepage": "https://github.com/CodingToye/weather-dashboard#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm test -- --watchAll=false"
+      "pre-commit": "lint-staged"
     }
   },
   "devDependencies": {

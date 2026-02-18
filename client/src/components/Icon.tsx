@@ -47,7 +47,7 @@ const Icon: React.FC<IconProps> = ({
 }) => {
   return (
     <span
-      className={`material-symbols-outlined ${extraClasses}`}
+      className={`material-symbols-rounded ${extraClasses}`}
       onClick={onClick}
       role="img"
       aria-label={ariaLabel}

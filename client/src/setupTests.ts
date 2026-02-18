@@ -4,9 +4,31 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
+import {TextDecoder, TextEncoder} from "util";
 
 global.ResizeObserver = class ResizeObserver {
   observe() {}
   unobserve() {}
   disconnect() {}
 };
+
+global.TextDecoder = global.TextDecoder || TextDecoder;
+global.TextEncoder = global.TextEncoder || TextEncoder;
+
+beforeAll(() => {
+  global.fetch = jest.fn(
+    () =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({city: "Chester"}),
+      }) as unknown as Promise<Response>
+  );
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});

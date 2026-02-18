@@ -59,7 +59,7 @@ const CustomRadio: React.FC<CustomRadioProps> = ({
       />
       <label
         htmlFor={id}
-        className="flex justify-center items-center text-xs w-12 h-6 cursor-pointer z-20"
+        className="flex justify-center items-center text-xs w-10 lg:w-12 h-6 cursor-pointer z-20"
       >
         {value}
       </label>

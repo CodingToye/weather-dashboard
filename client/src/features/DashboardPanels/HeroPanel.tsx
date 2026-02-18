@@ -17,7 +17,8 @@
  * )
  */
 
-import {SearchedLocation, ForecastHour} from "../../types/types";
+import {SearchedLocation} from "../../types/types";
+import {ForecastHour} from "../DashboardPanels/ForecastPanels/types";
 import Panel from "../../components/Panel";
 
 import TemperaturePanel from "./TemperaturePanel";

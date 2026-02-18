@@ -19,10 +19,10 @@
 import React, {useState, useRef, useEffect} from "react";
 import {useSpring, animated} from "react-spring";
 
-import Icon from "../../components/Icon";
-import Button from "../../components/Button";
-import {Alert} from "../../types/types";
-import {getFullDate} from "../../utils/dates.utils";
+import Icon from "../../../components/Icon";
+import {getFullDate} from "../../../utils/dates.utils";
+
+import {Alert} from "./types";
 
 /** Properties for the AlertPanel component
  *
@@ -69,30 +69,30 @@ const AlertPanel: React.FC<AlertProps> = ({alert, onClick}) => {
 
   return (
     <div
-      className="text-sm flex flex-col bg-primary text-neutral-lightGrey rounded cursor-pointer"
+      className="text-sm flex flex-col bg-primary dark:bg-neutral-darkGrey text-white dark:text-neutral-lightGrey  rounded cursor-pointer shadow-lg"
       onClick={togglePanel}
     >
       <div className="flex flex-row justify-between items-center font-bold p-4">
-        <p>{alert.category}</p>
+        <div className="flex flex-col">
+          <p>
+            Category: <small>{alert.category}</small>
+          </p>
+        </div>
         <div className="flex items-center gap-2">
-          <p>{alert.event}</p>
-          <Button
+          <Icon
+            iconName="cancel"
+            extraClasses="text-base hover:text-primary text-white transition"
+            ariaLabel="Remove alert icon"
             onClick={(e) => onClick(e, alert)}
-            title="Click to remove alert"
-          >
-            <Icon
-              iconName="cancel"
-              extraClasses="text-base"
-              ariaLabel="Remove alert icon"
-            />
-          </Button>
+          />
         </div>
       </div>
       <animated.div
         style={expandCollapseStyle}
-        className="bg-neutral-lightGrey text-neutral-darkGrey rounded-b"
+        className="bg-neutral-paleGrey dark:bg-neutral-lightGrey text-neutral-darkGrey rounded-b"
       >
-        <div ref={panelRef} className="p-4">
+        <section ref={panelRef} className="p-4">
+          <h1 className="text-base mb-4">{alert.event}</h1>
           <div className="flex justify-between mb-4">
             <div className="flex items-center">
               <Icon
@@ -113,7 +113,7 @@ const AlertPanel: React.FC<AlertProps> = ({alert, onClick}) => {
           </div>
 
           <small>Reported by {alert.headline}</small>
-        </div>
+        </section>
       </animated.div>
     </div>
   );

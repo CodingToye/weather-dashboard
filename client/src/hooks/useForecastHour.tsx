@@ -28,7 +28,10 @@
 
 import {useMemo} from "react";
 
-import {Forecast, ForecastHour} from "../types/types";
+import {
+  Forecast,
+  ForecastHour,
+} from "../features/DashboardPanels/ForecastPanels/types";
 
 export const useForecastHour = (forecast?: Forecast): ForecastHour[] => {
   return useMemo(() => {

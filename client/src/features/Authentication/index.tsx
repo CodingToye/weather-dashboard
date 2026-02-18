@@ -5,7 +5,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 import {useAuth} from "../../context/authContext";
 import Panel from "../../components/Panel";
-import logo from "../../logo_tray.png";
+import logo from "../../logo.png";
 
 import LoginUser from "./LoginUser";
 import RegisterUser from "./RegisterUser";
@@ -20,13 +20,13 @@ const Authentication = () => {
     });
   }, []);
 
-  if (user) {
+  if (user?.emailVerified) {
     return null;
   }
 
   return (
     <div className="h-screen flex items-center justify-center">
-      <Panel extraClasses="p-6">
+      <Panel extraClasses="p-6 w-full mx-8 lg:mx-0 lg:w-1/3">
         <header className="mb-2 flex flex-col items-center">
           <img src={logo} className="-mt-24 mb-4 w-32" />
           <h1 className="text-lg">

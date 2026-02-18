@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 
-import WeeklyForecastPanel from "../WeeklyForecastPanel";
+import WeeklyForecastPanel from "../ForecastPanels/WeeklyForecastPanel";
 import {Forecast} from "../../../types/types";
 
 describe("WeeklyForecastPanel", () => {

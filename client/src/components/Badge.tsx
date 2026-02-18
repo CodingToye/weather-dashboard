@@ -41,14 +41,13 @@ export interface BadgeProps {
 const Badge: React.FC<BadgeProps> = ({
   children,
   bgColor = "bg-primary",
-  textColor = "text-white",
   active = false,
   ariaLabel = "Badge",
 }) => {
   return (
     <span
       className={`${active ? bgColor : " opacity-10"} ${
-        active ? textColor : "text-darkGrey opacity-50"
+        active ? "text-white" : "text-neutral-lightGrey opacity-50"
       } p-1 rounded text-xs`}
       aria-label={ariaLabel}
     >

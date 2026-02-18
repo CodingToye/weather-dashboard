@@ -25,10 +25,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import {ForecastHour} from "../../types/types";
 import CustomTooltip from "../../components/CustomTooltip";
 import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
 import {useTheme} from "../../context/themeContext";
+
+import {ForecastHour} from "./ForecastPanels/types";
 
 /** Properties for the TemperaturePanel component
  *

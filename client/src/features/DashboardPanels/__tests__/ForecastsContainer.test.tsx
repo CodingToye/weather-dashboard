@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 
-import ForecastsContainer from "../ForecastsContainer";
+import ForecastsContainer from "../ForecastPanels";
 import {Forecast} from "../../../types/types";
 
 const mockForecast = {

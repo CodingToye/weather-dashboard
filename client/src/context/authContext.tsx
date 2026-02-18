@@ -2,19 +2,22 @@ import React, {
   createContext,
   useContext,
   useState,
+  useEffect,
   ReactNode,
   Dispatch,
   SetStateAction,
 } from "react";
 import {type User} from "firebase/auth";
-import {getAuth} from "firebase/auth";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 import useWeatherData from "../hooks/useWeatherData";
+import {SearchedLocation} from "../types/types";
 
-interface UserDetails {
+export interface UserDetails {
   firstName?: string;
   email?: string;
   location?: string;
+  uid?: string;
 }
 
 interface AuthContextType {
@@ -25,7 +28,8 @@ interface AuthContextType {
   handleLogout: () => void;
   showRegister: boolean;
   toggleShowRegister: () => void;
-  weatherData: null;
+  weatherData: SearchedLocation | null;
+  refreshUser: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -36,10 +40,33 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const {weatherData, fetchWeatherData} = useWeatherData();
 
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        currentUser.reload().then(() => {
+          setUser(currentUser);
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const refreshUser = () => {
+    const auth = getAuth();
+    if (auth.currentUser) {
+      auth.currentUser.reload().then(() => {
+        setUser(auth.currentUser); // Ensure state is refreshed with updated user details
+      });
+    }
+  };
+
   const toggleShowRegister = () => setShowRegister(!showRegister);
 
   const handleLogout = () => {
-    // console.log("handleLogout...");
     const auth = getAuth();
     auth.signOut().then(() => {
       setUser(null);
@@ -57,6 +84,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     weatherData,
     showRegister,
     toggleShowRegister,
+    refreshUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -9,19 +9,22 @@ import reportWebVitals from "./reportWebVitals";
 import {ThemeProvider} from "./context/themeContext";
 import {UnitsProvider} from "./context/unitsContext";
 import {AuthProvider} from "./context/authContext";
+import {ModalProvider} from "./context/modalContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <UnitsProvider>
-      <ThemeProvider>
+    <ThemeProvider>
+      <UnitsProvider>
         <AuthProvider>
-          <App />
+          <ModalProvider>
+            <App />
+          </ModalProvider>
         </AuthProvider>
-      </ThemeProvider>
-    </UnitsProvider>
+      </UnitsProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

@@ -15,12 +15,14 @@
 
 import {useState, useEffect} from "react";
 
-import Panel from "../../components/Panel";
-import {Alerts, Alert} from "../../types/types";
-import Icon from "../../components/Icon";
-import Button from "../../components/Button";
+import {
+  loadAlerts,
+  dismissAlert,
+  getActiveAlertCount,
+} from "../../../utils/alerts.utils";
 
-import AlertPanel from "./AlertPanel";
+import {Alerts, Alert} from "./types";
+import AlertPanel from "./Alert";
 
 /**
  * Properties for the AlertsPanel Component
@@ -37,57 +39,37 @@ export interface AlertsPanelProps {
 }
 
 const AlertsPanel: React.FC<AlertsPanelProps> = ({weatherAlerts}) => {
-  const [alerts, setAlerts] = useState<Alert[]>([]);
-  const [originalAlerts, setOriginalAlerts] = useState<Alert[]>([]);
+  const activeAlerts = loadAlerts(weatherAlerts?.alert ?? []);
+  console.log(activeAlerts);
+  const [alerts, setAlerts] = useState<Alert[]>(activeAlerts);
 
   useEffect(() => {
     if (weatherAlerts?.alert) {
-      setAlerts(weatherAlerts.alert);
-      setOriginalAlerts(weatherAlerts.alert);
+      setAlerts(loadAlerts(weatherAlerts.alert));
     }
   }, [weatherAlerts]);
   const handleRemove = (e: React.MouseEvent, alertToRemove: Alert) => {
     e.stopPropagation();
+    if (!alertToRemove) {
+      console.error("Attempted to remove an undefined alert");
+      return;
+    }
     setAlerts((currentAlerts) =>
       currentAlerts.filter((alert) => alert !== alertToRemove)
     );
+    dismissAlert(alertToRemove);
   };
-
-  const handleRestore = () => {
-    setAlerts(originalAlerts);
-  };
-
-  const refreshAlertsAvailable = alerts.length < originalAlerts.length;
 
   return (
     <>
-      <Panel
-        extraClasses="bg-neutral-midGrey dark:bg-neutral-midGrey relative"
-        dataTestId="alerts-panel-test"
-      >
-        <header className="flex items-center mb-2">
-          <Icon
-            iconName="crisis_alert"
-            extraClasses="mr-2 text-white"
-            ariaLabel="Local Weather Alert icon"
-          />
-          <h1 className="text-sm text-white">Local Weather Alerts</h1>
+      <section data-testid="alerts-panel-test">
+        <header className="mb-2 text-center">
+          <h1 className="text-sm text-primary">
+            There {getActiveAlertCount(alerts) == 0 ? "are" : "is currently"}{" "}
+            {getActiveAlertCount(alerts)}{" "}
+            {getActiveAlertCount(alerts) == 1 ? "alert" : "alerts"}
+          </h1>
         </header>
-        <div className="absolute top-4 right-4">
-          <Button
-            onClick={handleRestore}
-            title="Click to refresh alerts"
-            isDisabled={!refreshAlertsAvailable}
-            extraClasses={`${refreshAlertsAvailable ? "" : "opacity-50"}`}
-          >
-            <Icon
-              iconName="refresh"
-              extraClasses="text-sm"
-              ariaLabel="Weather Alerts refresh icon"
-            />
-          </Button>
-        </div>
-
         <section className="flex flex-col gap-4">
           {alerts.map((alert, index) => (
             <AlertPanel
@@ -97,7 +79,7 @@ const AlertsPanel: React.FC<AlertsPanelProps> = ({weatherAlerts}) => {
             />
           ))}
         </section>
-      </Panel>
+      </section>
     </>
   );
 };

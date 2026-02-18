@@ -18,8 +18,10 @@
 import Panel from "../../components/Panel";
 import PieChance from "../../components/PieChance";
 import Icon from "../../components/Icon";
-import {Forecast} from "../../types/types";
 import {cmToMm, cmToInches} from "../../utils/units.utils";
+import Header from "../../components/Header";
+
+import {Forecast} from "./ForecastPanels/types";
 
 export interface SnowPanelProps {
   forecast: Forecast;
@@ -40,9 +42,7 @@ const SnowPanel: React.FC<SnowPanelProps> = ({forecast, measurementUnit}) => {
   return (
     <Panel flexDirection="col" itemsCentered dataTestId="snow-panel-test">
       <div className="flex flex-col items-center">
-        <header className="mb-2">
-          <h1 className="text-sm text-primary">Snow chance</h1>
-        </header>
+        <Header heading="Snow Chance" />
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon
             iconName="weather_snowy"

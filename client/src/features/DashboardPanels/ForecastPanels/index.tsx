@@ -17,11 +17,9 @@
     )}
  * )
  */
-import {Forecast, Alerts} from "../../types/types";
-
+import {Forecast} from "./types";
 import WeeklyForecastPanel from "./WeeklyForecastPanel";
 import HourlyForecastPanel from "./HourlyForecastPanel";
-import AlertsPanel from "./AlertsPanel";
 
 /** Properties for the ForecastsContainer component
  *
@@ -29,7 +27,7 @@ import AlertsPanel from "./AlertsPanel";
  *
  * @interface
  */
-export interface ForecastsContainerProps {
+export interface ForecastsPanelsProps {
   /** searchedLocation data object */
   searchedLocation: {
     location: {
@@ -41,26 +39,20 @@ export interface ForecastsContainerProps {
   };
   /** forecast data object */
   forecast: Forecast | undefined;
-  /** alerts data object */
-  alerts: Alerts | undefined;
   /** current active unit */
   unit: string;
 }
 
-const ForecastsContainer: React.FC<ForecastsContainerProps> = ({
+const ForecastsPanels: React.FC<ForecastsPanelsProps> = ({
   forecast,
   unit,
-  alerts,
   searchedLocation,
 }) => {
-  const hasAlerts = !!alerts?.alert?.length;
-
   return (
     <>
-      <div className="flex h-full flex-col gap-8  overflow-hidden">
+      <div className="flex h-full flex-col grow gap-8  overflow-hidden">
         {forecast && (
           <>
-            {hasAlerts && <AlertsPanel weatherAlerts={alerts} />}
             {searchedLocation && (
               <HourlyForecastPanel
                 forecast={forecast}
@@ -77,4 +69,4 @@ const ForecastsContainer: React.FC<ForecastsContainerProps> = ({
   );
 };
 
-export default ForecastsContainer;
+export default ForecastsPanels;

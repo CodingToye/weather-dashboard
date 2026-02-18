@@ -18,7 +18,9 @@
 import Panel from "../../components/Panel";
 import PieChance from "../../components/PieChance";
 import Icon from "../../components/Icon";
-import {Forecast} from "../../types/types";
+import Header from "../../components/Header";
+
+import {Forecast} from "./ForecastPanels/types";
 
 export interface RainPanelProps {
   forecast: Forecast;
@@ -39,9 +41,7 @@ const RainPanel: React.FC<RainPanelProps> = ({forecast, measurementUnit}) => {
   return (
     <Panel itemsCentered dataTestId="rain-panel-test">
       <div className="flex flex-col items-center">
-        <header className="mb-2">
-          <h1 className="text-sm text-primary">Rain chance</h1>
-        </header>
+        <Header heading="Rain Chance" />
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon
             iconName="rainy"

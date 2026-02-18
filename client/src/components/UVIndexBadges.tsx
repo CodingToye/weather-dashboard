@@ -74,7 +74,6 @@ export const UVIndexBadges = React.memo(({uvIndex}: UVIndexBadgesProps) => {
         <Badge
           key={category.label}
           bgColor={`bg-${category.bgColor}`}
-          textColor={category.textColor}
           active={uvIndex >= category.min && uvIndex <= category.max}
           ariaLabel={category.label}
         >

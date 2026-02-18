@@ -28,9 +28,12 @@ import {
 import Panel from "../../components/Panel";
 import Icon from "../../components/Icon";
 import CustomTooltip from "../../components/CustomTooltip";
-import {Current, ForecastHour} from "../../types/types";
+import {Current} from "../../types/types";
 import {getHourLabel, getCurrentHourLabel} from "../../utils/dates.utils";
 import {useTheme} from "../../context/themeContext";
+import Header from "../../components/Header";
+
+import {ForecastHour} from "./ForecastPanels/types";
 
 /** Properties for the WindPanel component
  *
@@ -68,9 +71,7 @@ const WindPanel: React.FC<WindPanelProps> = ({
   return (
     <Panel extraClasses="!items-start" dataTestId="wind-panel-test">
       <div>
-        <header className="mb-2">
-          <h1 className="text-sm text-primary">Wind</h1>
-        </header>
+        <Header heading="Wind" />
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon
             iconName="air"

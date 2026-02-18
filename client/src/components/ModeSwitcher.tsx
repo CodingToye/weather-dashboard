@@ -29,6 +29,7 @@ const ModeSwitcher: React.FC = () => {
     <DarkModeSwitch
       checked={theme === "light"}
       onChange={(checked) => handleThemeChange(!checked)}
+      size={18}
     />
   );
 };

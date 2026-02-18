@@ -17,6 +17,7 @@ import Panel from "../../components/Panel";
 import PieChance from "../../components/PieChance";
 import Icon from "../../components/Icon";
 import {humidityLevels} from "../../utils/weather.utils";
+import Header from "../../components/Header";
 
 /** Properties for the HumidityPanel component
  *
@@ -40,9 +41,7 @@ const HumidityPanel: React.FC<HumidityPanelProps> = ({humidity}) => {
   return (
     <Panel itemsCentered dataTestId="humidity-panel-test">
       <div className="flex flex-col items-center">
-        <header className="mb-2">
-          <h1 className="text-sm text-primary">Humidity</h1>
-        </header>
+        <Header heading="Humidity" />
         <div className="flex items-center text-neutral-darkGrey/50 dark:text-white/50">
           <Icon
             iconName={currentHumidityLevels.icon}

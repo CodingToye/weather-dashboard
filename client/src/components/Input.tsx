@@ -12,6 +12,9 @@
           placeholder="myPlaceholder"
           register={register}
           icon="my_icon"
+          formState={formState}
+          inputType="password"
+          label="Email"
         />
  * )
  */
@@ -40,6 +43,8 @@ export interface InputProps<TFieldValues extends FieldValues> {
   formState: FormState<TFieldValues>;
   inputType?: string;
   label?: string | null;
+  extraClasses?: string;
+  defaultValue?: string;
 }
 
 const Input = <TFieldValues extends FieldValues>({
@@ -50,13 +55,18 @@ const Input = <TFieldValues extends FieldValues>({
   icon,
   inputType = "text",
   label,
+  extraClasses,
+  defaultValue,
 }: InputProps<TFieldValues>) => {
   const errorMessage = getErrorMessage(formState.errors, name);
   return (
     <>
-      <fieldset>
+      <fieldset className="w-full">
         {label && (
-          <label htmlFor={`${String(name)}`} className="text-sm ">
+          <label
+            htmlFor={`${String(name)}`}
+            className="text-xs text-white/50 block mb-1"
+          >
             {label}
           </label>
         )}
@@ -64,7 +74,7 @@ const Input = <TFieldValues extends FieldValues>({
           {icon && (
             <Icon
               iconName={icon}
-              extraClasses="text-base text-white dark:text-neutral-darkGrey/50 w-16 absolute left-2 top-1/2 -translate-y-1/2"
+              extraClasses="text-base text-neutral-lightGrey dark:text-neutral-darkGrey/50 w-16 absolute left-2 top-1/2 -translate-y-1/2"
               ariaLabel="search icon"
             />
           )}
@@ -72,10 +82,11 @@ const Input = <TFieldValues extends FieldValues>({
             {...register(name as Path<TFieldValues>, {required: true})}
             type={inputType}
             name={name as string}
-            className={`text-white text-sm dark:text-neutral-darkGrey bg-neutral-midGrey dark:bg-white placeholder:text-white/50  dark:placeholder:text-neutral-darkGrey/50  focus:placeholder:text-white/50 outline-none focus:bg-primary focus:shadow-soft-secondary-outline dark:focus:shadow-soft-primary-outline focus:border-primary focus:outline-none p-2 w-full lg:w-72 rounded transition-all ${
+            className={`text-neutral-darkGrey text-sm dark:text-neutral-darkGrey bg-neutral-paleGrey dark:bg-white placeholder:text-neutral-lightGrey outline-none focus:shadow-soft-secondary-outline dark:focus:shadow-soft-primary-outline focus:border-neutral-darkGrey focus:outline-none p-2  rounded transition-all w-full ${
               icon && "pl-8"
-            }`}
+            } ${extraClasses}`}
             placeholder={placeholder}
+            defaultValue={defaultValue}
             data-testid="input-test"
           />
         </div>

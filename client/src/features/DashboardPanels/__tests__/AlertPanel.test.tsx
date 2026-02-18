@@ -1,6 +1,6 @@
 import {render, fireEvent, screen} from "@testing-library/react";
 
-import AlertPanel from "../AlertPanel";
+import AlertPanel from "../AlertsPanel/Alert";
 
 describe("AlertPanel integration test", () => {
   const mockAlert = {

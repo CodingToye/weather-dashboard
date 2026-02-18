@@ -1,29 +1,33 @@
 import {useEffect, useState} from "react";
 import {doc, getDoc} from "firebase/firestore";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
+import Modal from "react-modal";
 
-import logo from "./logo.png";
+import Panel from "./components/Panel";
+import UnitSwitchers from "./features/DataTools/UnitSwitchers.tool";
 import Loader from "./components/Loader";
 import {db} from "./firebase";
-import ModeSwitcher from "./components/ModeSwitcher";
-import UnitSwitchers from "./features/DataTools/UnitSwitchers.tool";
-import Icon from "./components/Icon";
-import SearchLocation from "./features/SearchLocation";
 import DashboardPanelsContainer from "./features/DashboardPanels";
-import {formatCurrentDate} from "./utils/dates.utils";
 import useWeatherData from "./hooks/useWeatherData";
 import Authentication from "./features/Authentication";
-import {useAuth} from "./context/authContext";
+import {useAuth, UserDetails} from "./context/authContext";
+import {SearchedLocation} from "./types/types";
+import Toolbar from "./features/Toolbar/Toolbar";
+import SearchLocation from "./features/SearchLocation";
 
 import "./App.css";
 
-// setLogLevel("debug");
+Modal.setAppElement("#root");
+
+export interface AppProps {
+  /** searchedLocation data object */
+  searchedLocation: SearchedLocation | null;
+}
 
 function App() {
-  const {user, userDetails, setUserDetails, handleLogout} = useAuth();
-  const [loading, setLoading] = useState(true);
+  const {user, userDetails, setUserDetails} = useAuth();
+  const [loading, setLoading] = useState<boolean>(true);
   const {fetchWeatherData, weatherData} = useWeatherData();
-  const currentDate = formatCurrentDate();
 
   useEffect(() => {
     setLoading(true);
@@ -33,7 +37,13 @@ function App() {
         const userDocRef = doc(db, "users", currentUser.uid);
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
-          setUserDetails(userDocSnap.data());
+          const data = userDocSnap.data() as UserDetails;
+          setUserDetails({
+            uid: currentUser.uid,
+            firstName: data.firstName,
+            email: data.email,
+            location: data.location,
+          });
         } else {
           console.log("No such document");
         }
@@ -41,6 +51,14 @@ function App() {
       setLoading(false);
     });
   }, [setUserDetails]);
+
+  const handleSearch = async (city: string): Promise<void> => {
+    try {
+      await fetchWeatherData(city);
+    } catch (error) {
+      console.error("Searcherror:", error);
+    }
+  };
 
   useEffect(() => {
     if (userDetails && userDetails.location) {
@@ -58,65 +76,27 @@ function App() {
     );
   }
 
-  const handleSearch = (city: string) => {
-    fetchWeatherData(city);
-  };
-
-  return (
-    <>
-      {!user ? (
-        <Authentication />
-      ) : (
-        <div className="flex flex-col gap-4" data-testid="app-test">
-          <div
-            className={` ${
-              process.env.NODE_ENV === "development"
-                ? "bg-primary text-white"
-                : "bg-success text-white"
-            } fixed top-0 right-8 z-50 p-2 text-xs rounded-b-lg`}
-          >
-            {process.env.NODE_ENV}
-          </div>
-          <main className="flex flex-col lg:gap-4 grow ">
-            <div className="flex justify-between flex-col lg:flex-row bg-neutral-lightGrey dark:bg-neutral-darkGrey p-8 sticky top-0 z-40">
-              <header className="flex gap-4 justify-between">
-                <div className="flex items-center gap-4">
-                  <img src={logo} className="w-24" />
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                    className="rounded-full w-12"
-                  />
-
-                  <div className="flex flex-col items-start justify-center">
-                    <small className="capitalize">
-                      Hi {userDetails?.firstName}!
-                    </small>
-                    <h4 className="text-base">{currentDate}</h4>
-                    {/* <p>{userDetails?.location}</p> */}
-                  </div>
-                </div>
-              </header>
-              <section className="flex flex-row flex-wrap lg:flex-row lg:flex-nowrap gap-4 lg:gap-8 lg:items-center justify-between lg:justify-end pt-4 lg:py-4">
+  const MainApp = () => {
+    return (
+      <div className="flex flex-col gap-4" data-testid="app-test">
+        <main className="flex flex-col lg:gap-0 grow ">
+          <Toolbar searchedLocation={weatherData || null} />
+          <div className="px-8 mb-8">
+            <Panel>
+              <div className="flex flex-row flex-wrap lg:flex-row lg:flex-nowrap gap-4 lg:gap-8 lg:items-center justify-between">
                 <SearchLocation onSearch={handleSearch} />
                 <UnitSwitchers />
-                <button
-                  onClick={handleLogout}
-                  title="Logout"
-                  className="flex items-center"
-                >
-                  <Icon iconName="logout" extraClasses="text-xlg" />
-                </button>
-                <div className="absolute top-8 right-0 lg:static">
-                  <ModeSwitcher />
-                </div>
-              </section>
-            </div>
-            <DashboardPanelsContainer searchedLocation={weatherData || null} />
-          </main>
-        </div>
-      )}
-    </>
-  );
+              </div>
+            </Panel>
+          </div>
+          <DashboardPanelsContainer searchedLocation={weatherData || null} />
+        </main>
+      </div>
+    );
+  };
+
+  // return <>{!user?.emailVerified ? <Authentication /> : <MainApp />}</>;
+  return <MainApp />;
 }
 
 export default App;

@@ -39,6 +39,7 @@ export interface PanelProps {
   itemsCentered?: boolean;
   /** passing through data-testid for testing */
   dataTestId?: string;
+  onClick?: () => void;
 }
 
 const Panel: React.FC<PanelProps> = ({
@@ -47,9 +48,11 @@ const Panel: React.FC<PanelProps> = ({
   flexDirection = "col",
   itemsCentered = false,
   dataTestId = "",
+  onClick,
 }) => {
   return (
     <section
+      onClick={onClick}
       data-testid={dataTestId}
       className={`c-panel flex flex-${flexDirection} ${
         itemsCentered && "items-center"

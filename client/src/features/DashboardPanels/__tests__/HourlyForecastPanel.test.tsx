@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 
-import HourlyForecastPanel from "../HourlyForecastPanel";
+import HourlyForecastPanel from "../ForecastPanels/HourlyForecastPanel";
 import {Forecast} from "../../../types/types";
 
 const mockForecast = {

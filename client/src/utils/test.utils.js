@@ -3,12 +3,18 @@
 import React from "react";
 import {render as rtlRender} from "@testing-library/react";
 
+import {AuthProvider} from "../context/authContext"; // Adjust the import path as needed
 import {ThemeProvider} from "../context/themeContext";
 
-function render(ui, {...renderOptions} = {}) {
-  function Wrapper({children}) {
-    return <ThemeProvider>{children}</ThemeProvider>;
-  }
+function render(
+  ui,
+  {mockUser = {firstName: "Test User"}, ...renderOptions} = {}
+) {
+  const Wrapper = ({children}) => (
+    <ThemeProvider>
+      <AuthProvider value={{user: mockUser}}>{children}</AuthProvider>
+    </ThemeProvider>
+  );
 
   return rtlRender(ui, {wrapper: Wrapper, ...renderOptions});
 }

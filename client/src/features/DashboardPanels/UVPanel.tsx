@@ -26,11 +26,13 @@ import {
 
 import Panel from "../../components/Panel";
 import CustomTooltip from "../../components/CustomTooltip";
-import {Forecast} from "../../types/types";
 import {UVIndexBadges} from "../../components/UVIndexBadges";
 import Icon from "../../components/Icon";
 import {getDay} from "../../utils/dates.utils";
 import {useTheme} from "../../context/themeContext";
+import Header from "../../components/Header";
+
+import {Forecast} from "./ForecastPanels/types";
 
 /** Properties for the UVPanel component
  *
@@ -65,9 +67,7 @@ const UVPanel: React.FC<UVPanelProps> = ({current, forecast}) => {
   return (
     <Panel extraClasses="!items-start" dataTestId="uv-panel-test">
       <div>
-        <header className="mb-2">
-          <h1 className="text-sm text-primary">UV index</h1>
-        </header>
+        <Header heading="UV Index" />
         <div className="flex items-center gap-4 text-neutral-darkGrey/50 dark:text-white/50">
           <div className="flex items-center">
             <Icon

@@ -64,7 +64,7 @@ const UnitSwitcher: React.FC<UnitSwitchProps> = ({
         <small className="mr-2 hidden lg:block dark:text-white/50 text-neutral-midGrey">
           {unitConfig?.text}
         </small>
-        <div className="flex bg-neutral-midGrey rounded-lg relative ">
+        <div className="flex bg-neutral-lightGrey dark:bg-neutral-darkGrey rounded-lg relative ">
           <CustomRadio
             onChange={handleChange}
             name={unitType}
@@ -83,9 +83,9 @@ const UnitSwitcher: React.FC<UnitSwitchProps> = ({
           <div
             className={`${
               activeVal === unitConfig?.val2
-                ? "rounded-r-lg left-12"
+                ? "rounded-r-lg left-10 lg:left-12"
                 : "rounded-l-lg left-0"
-            } absolute top-0 transform transition-all ease-in-out duration-150 bg-primary w-12 h-6 z-10 switch-selection`}
+            } absolute top-0 transform transition-all ease-in-out duration-150 bg-primary w-10 lg:w-12 h-6 z-10 switch-selection`}
           ></div>
         </div>
       </div>

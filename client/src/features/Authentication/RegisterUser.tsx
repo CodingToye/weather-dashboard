@@ -1,6 +1,10 @@
 // src/features/Authentiation/RegisterUser.tsx
 
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import {FirebaseError} from "firebase/app";
 import {doc, setDoc} from "firebase/firestore";
 import {useForm, SubmitHandler} from "react-hook-form";
@@ -59,6 +63,10 @@ const RegisterUser: React.FC<RegisterUserProps> = ({onRegistered}) => {
       );
       const user = userCredential.user;
 
+      // Send verification email
+      await sendEmailVerification(user);
+      console.log("Verification email sent to " + user.email);
+
       await setDoc(doc(db, "users", user.uid), {
         firstName: data.firstName,
         email: data.email,
@@ -75,7 +83,7 @@ const RegisterUser: React.FC<RegisterUserProps> = ({onRegistered}) => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-auto min-w-72"
+        className="flex flex-col gap-4 w-auto"
       >
         <div className="flex gap-4">
           <Input
@@ -121,7 +129,9 @@ const RegisterUser: React.FC<RegisterUserProps> = ({onRegistered}) => {
           icon="location_on"
           label="Preferred Location"
         />
-        <Button buttonType="submit">Register</Button>
+        <Button buttonType="submit" extraClasses="mt-2">
+          Register
+        </Button>
       </form>
     </>
   );
