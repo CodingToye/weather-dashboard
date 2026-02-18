@@ -1,8 +1,9 @@
 import fetch from "node-fetch";
+import * as functions from "firebase-functions/v2";
 
 async function fetchWeatherData(city, mode, includeAlerts = false) {
-  const apiKey = process.env.WEATHER_API_KEY;
-  let apiUrl = `https://api.weatherapi.com/v1/${mode}.json?key=${apiKey}&q=${city}&days=5`;
+  const apiKey = functions.params.get("weather.key");
+  let apiUrl = `https://api.weatherapi.com/v1/${mode}.json?key=${apiKey}&q=${city}&aqi=yes&tides=yes&days=5`;
 
   if (includeAlerts) {
     apiUrl += "&alerts=yes";
