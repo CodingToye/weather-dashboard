@@ -4,6 +4,9 @@ import {useState, useCallback} from "react";
 
 import {SearchedLocation} from "../types/types";
 
+const BASE_URL =
+  "https://us-central1-weather-dashboard-417915.cloudfunctions.net/api";
+
 const defaultWeatherData: SearchedLocation = {
   current: {
     temp_c: 0,
@@ -50,9 +53,9 @@ function useWeatherData() {
       };
 
       const timestamp = Date.now();
-      const apiUrlBase = process.env.REACT_APP_API_URL;
-      const currentApiUrl = `${apiUrlBase}/current?city=${city}&_=${timestamp}`;
-      const forecastApiUrl = `${apiUrlBase}/forecast?city=${city}&_=${timestamp}`;
+      // const apiUrlBase = process.env.REACT_APP_API_URL;
+      const currentApiUrl = `${BASE_URL}/current?city=${city}&_=${timestamp}`;
+      const forecastApiUrl = `${BASE_URL}/forecast?city=${city}&_=${timestamp}`;
 
       const [currentData, forecastData] = await Promise.all([
         fetchData(currentApiUrl),
@@ -68,7 +71,10 @@ function useWeatherData() {
     } catch (error) {
       console.error("Error fetching weather data:", error);
     }
+    console.log("CURRENT DATA", currentData);
+    console.log("FORECAST DATA", forecastData);
   }, []);
+
   return {weatherData, fetchWeatherData};
 }
 
