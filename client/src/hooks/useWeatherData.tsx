@@ -5,7 +5,7 @@ import {useState, useCallback} from "react";
 import {SearchedLocation} from "../types/types";
 
 const BASE_URL =
-  "https://weather-dashboard-417915.web.app/.cloudfunctions.net/api";
+  "https://us-central1-weather-dashboard-417915.cloudfunctions.net/api";
 
 const defaultWeatherData: SearchedLocation = {
   current: {
