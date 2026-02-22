@@ -42,6 +42,7 @@ const defaultWeatherData: SearchedLocation = {
 };
 
 function useWeatherData() {
+  console.log("FIZZ");
   const [weatherData, setWeatherData] = useState<SearchedLocation | null>(null);
   const fetchWeatherData = useCallback(async (city: string) => {
     try {
@@ -71,7 +72,10 @@ function useWeatherData() {
     } catch (error) {
       console.error("Error fetching weather data:", error);
     }
+    console.log("CURRENT DATA", currentData);
+    console.log("FORECAST DATA", forecastData);
   }, []);
+
   return {weatherData, fetchWeatherData};
 }
 
